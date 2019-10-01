@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JAppletFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="menuBar">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="menuBar" noResource="true"/>
+      </Properties>
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="Mlogin">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" resourceKey="Mlogin.icon"/>
+            <Property name="text" type="java.lang.String" resourceKey="Mlogin.text"/>
+            <Property name="name" type="java.lang.String" value="Mlogin" noResource="true"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="Mloginuser">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mloginuser.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mloginuser.text"/>
+                <Property name="name" type="java.lang.String" value="Mloginuser" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MloginuserActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlogOf">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MlogOf.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MlogOf.text"/>
+                <Property name="name" type="java.lang.String" value="MlogOf" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlogOfActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="fileMenu">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" resourceKey="fileMenu.icon"/>
+            <Property name="text" type="java.lang.String" resourceKey="fileMenu.text"/>
+            <Property name="name" type="java.lang.String" value="fileMenu" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+          </AuxValues>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="MuserAccount">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MuserAccount.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MuserAccount.text"/>
+                <Property name="name" type="java.lang.String" value="MuserAccount" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MuserAccountActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MeditPassword">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MeditPassword.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MeditPassword.text"/>
+                <Property name="name" type="java.lang.String" value="MeditPassword" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MeditPasswordActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MaktivaTetap">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MaktivaTetap.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MaktivaTetap.text"/>
+                <Property name="name" type="java.lang.String" value="MaktivaTetap" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MaktivaTetapActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mperkiraan">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mperkiraan.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mperkiraan.text"/>
+                <Property name="name" type="java.lang.String" value="Mperkiraan" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MperkiraanActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="Mbarang">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mbarang.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mbarang.text"/>
+                <Property name="name" type="java.lang.String" value="Mbarang" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MMerkBarang">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" resourceKey="MMerkBarang.icon"/>
+                    <Property name="text" type="java.lang.String" resourceKey="MMerkBarang.text"/>
+                    <Property name="name" type="java.lang.String" value="MMerkBarang" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MMerkBarangActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MkategoriBrg">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" resourceKey="MkategoriBrg.icon"/>
+                    <Property name="text" type="java.lang.String" resourceKey="MkategoriBrg.text"/>
+                    <Property name="name" type="java.lang.String" value="MkategoriBrg" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MkategoriBrgActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MdataBarang">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" resourceKey="MdataBarang.icon"/>
+                    <Property name="text" type="java.lang.String" resourceKey="MdataBarang.text"/>
+                    <Property name="name" type="java.lang.String" value="MdataBarang" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MdataBarangActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="Mpelanggan">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mpelanggan.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mpelanggan.text"/>
+                <Property name="name" type="java.lang.String" value="Mpelanggan" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MpelangganActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Msupplier">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Msupplier.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Msupplier.text"/>
+                <Property name="name" type="java.lang.String" value="Msupplier" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MsupplierActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Msales">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Msales.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Msales.text"/>
+                <Property name="name" type="java.lang.String" value="Msales" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MsalesActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mbank">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mbank.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mbank.text"/>
+                <Property name="name" type="java.lang.String" value="Mbank" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MbankActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Msetting">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Msetting.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Msetting.text"/>
+                <Property name="name" type="java.lang.String" value="Msetting" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MsettingActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MsettingStatPeriode">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MsettingStatPeriode.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MsettingStatPeriode.text"/>
+                <Property name="name" type="java.lang.String" value="MsettingStatPeriode" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MsettingStatPeriodeActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlogHistory">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MlogHistory.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MlogHistory.text"/>
+                <Property name="name" type="java.lang.String" value="MlogHistory" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlogHistoryActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="Manalisa">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Manalisa.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Manalisa.text"/>
+                <Property name="name" type="java.lang.String" value="Manalisa" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="Manalisastokbrg">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="Manalisastokbrg.text"/>
+                    <Property name="name" type="java.lang.String" value="Manalisastokbrg" noResource="true"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="MSearchingBarang">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MSearchingBarang.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MSearchingBarang.text"/>
+                <Property name="name" type="java.lang.String" value="MSearchingBarang" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MSearchingBarangActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="Mtransaksi">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" resourceKey="Mtransaksi.icon"/>
+            <Property name="text" type="java.lang.String" resourceKey="Mtransaksi.text"/>
+            <Property name="name" type="java.lang.String" value="Mtransaksi" noResource="true"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="Mjurnal">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mjurnal.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mjurnal.text"/>
+                <Property name="name" type="java.lang.String" value="Mjurnal" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MjurnalActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MdeliveryOrder">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MdeliveryOrder.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MdeliveryOrder.text"/>
+                <Property name="name" type="java.lang.String" value="MdeliveryOrder" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MdeliveryOrderActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mpenjualan">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mpenjualan.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mpenjualan.text"/>
+                <Property name="name" type="java.lang.String" value="Mpenjualan" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MpenjualanActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mpembelian">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mpembelian.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mpembelian.text"/>
+                <Property name="name" type="java.lang.String" value="Mpembelian" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MpembelianActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mhutang">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mhutang.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mhutang.text"/>
+                <Property name="name" type="java.lang.String" value="Mhutang" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MhutangActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mpiutang">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mpiutang.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mpiutang.text"/>
+                <Property name="name" type="java.lang.String" value="Mpiutang" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MpiutangActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mtutupbuku">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mtutupbuku.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mtutupbuku.text"/>
+                <Property name="name" type="java.lang.String" value="Mtutupbuku" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MtutupbukuActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Mtutupstok">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="Mtutupstok.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="Mtutupstok.text"/>
+                <Property name="name" type="java.lang.String" value="Mtutupstok" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MtutupstokActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MkoreksiStok">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="MkoreksiStok.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="MkoreksiStok.text"/>
+                <Property name="name" type="java.lang.String" value="MkoreksiStok" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MkoreksiStokActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="Mlaporan">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" resourceKey="Mlaporan.icon"/>
+            <Property name="text" type="java.lang.String" resourceKey="Mlaporan.text"/>
+            <Property name="name" type="java.lang.String" value="Mlaporan" noResource="true"/>
+          </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="Mlappembelian">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="Mlappembelian.text"/>
+                <Property name="name" type="java.lang.String" value="Mlappembelian" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem29">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem29.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem29" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem29ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem30">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem30.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem30" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem30ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem33">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem33.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem33" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem33ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="Mreturpembelian">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="Mreturpembelian.text"/>
+                <Property name="name" type="java.lang.String" value="Mreturpembelian" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="Mreturbelifaktur">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="Mreturbelifaktur.text"/>
+                    <Property name="name" type="java.lang.String" value="Mreturbelifaktur" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MreturbelifakturActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="Mrekapreturbeli">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="Mrekapreturbeli.text"/>
+                    <Property name="name" type="java.lang.String" value="Mrekapreturbeli" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MrekapreturbeliActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="MlapPenjualan">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapPenjualan.text"/>
+                <Property name="name" type="java.lang.String" value="MlapPenjualan" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem11.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem11" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem11ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem26">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem26.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem26" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem26ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem27">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem27.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem27" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem27ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem28">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem28.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem28" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem28ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem21">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem21.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem21" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem21ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="Mreturpenjualan">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="Mreturpenjualan.text"/>
+                <Property name="name" type="java.lang.String" value="Mreturpenjualan" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="Mreturjualfaktur">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="Mreturjualfaktur.text"/>
+                    <Property name="name" type="java.lang.String" value="Mreturjualfaktur" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MreturjualfakturActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="Mrekapreturjual">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="Mrekapreturjual.text"/>
+                    <Property name="name" type="java.lang.String" value="Mrekapreturjual" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MrekapreturjualActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="Mlapdeliveryorder">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="Mlapdeliveryorder.text"/>
+                <Property name="name" type="java.lang.String" value="Mlapdeliveryorder" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MlapFakturDO">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="MlapFakturDO.text"/>
+                    <Property name="name" type="java.lang.String" value="MlapFakturDO" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapFakturDOActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MrekapDO">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="MrekapDO.text"/>
+                    <Property name="name" type="java.lang.String" value="MrekapDO" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MrekapDOActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="MlapBarang">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapBarang.text"/>
+                <Property name="name" type="java.lang.String" value="MlapBarang" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem14.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem14" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem14ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem25">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem25.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem25" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem25ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem20">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem20.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem20" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem20ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem32">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jMenuItem32.text"/>
+                    <Property name="name" type="java.lang.String" value="jMenuItem32" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem32ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="MlapHutang">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapHutang.text"/>
+                <Property name="name" type="java.lang.String" value="MlapHutang" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MlapUmurHutang">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="MlapUmurHutang.text"/>
+                    <Property name="name" type="java.lang.String" value="MlapUmurHutang" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapUmurHutangActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="MlapPiutang">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapPiutang.text"/>
+                <Property name="name" type="java.lang.String" value="MlapPiutang" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MlapUmurPiutang">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="MlapUmurPiutang.text"/>
+                    <Property name="name" type="java.lang.String" value="MlapUmurPiutang" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapUmurPiutangActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MlapUmurPiutangPersales">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="MlapUmurPiutangPersales.text"/>
+                    <Property name="name" type="java.lang.String" value="MlapUmurPiutangPersales" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapUmurPiutangPersalesActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="MLapPerkiraan">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MLapPerkiraan.text"/>
+                <Property name="name" type="java.lang.String" value="MLapPerkiraan" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MLapPerkiraanActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlapFakturPajak">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapFakturPajak.text"/>
+                <Property name="name" type="java.lang.String" value="MlapFakturPajak" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapFakturPajakActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlapTutupBuku">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapTutupBuku.text"/>
+                <Property name="name" type="java.lang.String" value="MlapTutupBuku" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapTutupBukuActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlapJurnal">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapJurnal.text"/>
+                <Property name="name" type="java.lang.String" value="MlapJurnal" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapJurnalActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlapBukuBesar">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapBukuBesar.text"/>
+                <Property name="name" type="java.lang.String" value="MlapBukuBesar" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapBukuBesarActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlapNeraca">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapNeraca.text"/>
+                <Property name="name" type="java.lang.String" value="MlapNeraca" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapNeracaActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlapRugiLaba">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapRugiLaba.text"/>
+                <Property name="name" type="java.lang.String" value="MlapRugiLaba" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapRugiLabaActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MlapEkuitas">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="MlapEkuitas.text"/>
+                <Property name="name" type="java.lang.String" value="MlapEkuitas" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MlapEkuitasActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="helpMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="helpMenu.text"/>
+            <Property name="name" type="java.lang.String" value="helpMenu" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+          </AuxValues>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="javariesoft.JavarieSoftView" id="showAboutBox" methodName="showAboutBox"/>
+                </Property>
+                <Property name="name" type="java.lang.String" value="aboutMenuItem" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="Mkeluar">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="Mkeluar.text"/>
+            <Property name="name" type="java.lang.String" value="Mkeluar" noResource="true"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="org.jdesktop.application.Application" id="quit" methodName="quit"/>
+                </Property>
+                <Property name="name" type="java.lang.String" value="exitMenuItem" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="menuBar"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,66,0,0,2,122"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Container class="com.erv.model.DesktopCool" name="panelCool1">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="panelCool1" noResource="true"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="LblJenis">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="LblJenis.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="LblJenis.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="LblJenis.text"/>
+            <Property name="name" type="java.lang.String" value="LblJenis" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="120" y="0" width="200" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblJenis1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="LblJenis1.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="LblJenis1.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="LblJenis1.text"/>
+            <Property name="name" type="java.lang.String" value="LblJenis1" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="100" y="0" width="10" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblJenis2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="LblJenis2.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="LblJenis2.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="LblJenis2.text"/>
+            <Property name="name" type="java.lang.String" value="LblJenis2" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="0" width="80" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblJenis3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="LblJenis3.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="LblJenis3.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="LblJenis3.text"/>
+            <Property name="name" type="java.lang.String" value="LblJenis3" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="10" y="20" width="80" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblJenis4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="LblJenis4.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="LblJenis4.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="LblJenis4.text"/>
+            <Property name="name" type="java.lang.String" value="LblJenis4" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="100" y="20" width="10" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Lblgroup">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="Lblgroup.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="Lblgroup.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="Lblgroup.text"/>
+            <Property name="name" type="java.lang.String" value="Lblgroup" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="120" y="20" width="200" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

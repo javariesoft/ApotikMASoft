@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="neraca" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="bulan" class="java.lang.String">
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tahun" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2012"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     NERACABANTU."KODEPERKIRAAN" AS NERACABANTU_KODEPERKIRAAN,
+     NERACABANTU."NAMAPERKIRAAN" AS NERACABANTU_NAMAPERKIRAAN,
+     NERACABANTU."GRUP" AS NERACABANTU_GRUP,
+     NERACABANTU."TIPE" AS NERACABANTU_TIPE,
+     GRUP.grup AS NAMAGRUP,getTotalSaldo($P{bulan},$P{tahun},4) as Pendapatan,getTotalSaldo($P{bulan},$P{tahun},5) as HargaPokok,getTotalSaldo($P{bulan},$P{tahun},6) as Biaya,getTotalSaldo($P{bulan},$P{tahun},4)-getTotalSaldo($P{bulan},$P{tahun},5)-getTotalSaldo($P{bulan},$P{tahun},6) as Laba,
+     IFNULL( SELECT sum(SALDOPERIODE."SALDO") FROM "PUBLIC"."SALDOPERIODE" SALDOPERIODE WHERE LEFT(SALDOPERIODE.PERIODE,4) = (CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun})) AND SUBSTR(SALDOPERIODE.PERIODE,6,2) = (CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1)) AND SALDOPERIODE.KODEAKUN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 ) AS SALDOAWAL,
+     IFNULL( SELECT sum(RINCIJURNAL."DEBET") FROM "PUBLIC"."RINCIJURNAL" RINCIJURNAL INNER JOIN "PUBLIC"."JURNAL" JURNAL ON RINCIJURNAL."KODEJURNAL" = JURNAL."ID" WHERE MONTH(JURNAL.TANGGAL) = $P{bulan} AND YEAR(JURNAL.TANGGAL) = $P{tahun} AND RINCIJURNAL.KODEPERKIRAAN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 ) AS DEBET,
+     IFNULL( SELECT sum(RINCIJURNAL."KREDIT") FROM "PUBLIC"."JURNAL" JURNAL INNER JOIN "PUBLIC"."RINCIJURNAL" RINCIJURNAL ON JURNAL."ID" = RINCIJURNAL."KODEJURNAL" WHERE MONTH(JURNAL.TANGGAL) = $P{bulan} AND YEAR(JURNAL.TANGGAL) = $P{tahun} AND RINCIJURNAL.KODEPERKIRAAN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 ) AS KREDIT,
+     ifnull(
+     CASE NERACABANTU."GRUP"
+     WHEN 4 THEN
+     IFNULL( SELECT sum(SALDOPERIODE."SALDO") FROM "PUBLIC"."SALDOPERIODE" SALDOPERIODE WHERE LEFT(SALDOPERIODE.PERIODE,4) = (CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun})) AND SUBSTR(SALDOPERIODE.PERIODE,6,2) = (CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1)) AND SALDOPERIODE.KODEAKUN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )-
+     IFNULL( SELECT sum(RINCIJURNAL."DEBET") FROM "PUBLIC"."RINCIJURNAL" RINCIJURNAL INNER JOIN "PUBLIC"."JURNAL" JURNAL ON RINCIJURNAL."KODEJURNAL" = JURNAL."ID" WHERE MONTH(JURNAL.TANGGAL) = $P{bulan} AND YEAR(JURNAL.TANGGAL) = $P{tahun} AND RINCIJURNAL.KODEPERKIRAAN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )+
+     IFNULL( SELECT sum(RINCIJURNAL."KREDIT") FROM "PUBLIC"."JURNAL" JURNAL INNER JOIN "PUBLIC"."RINCIJURNAL" RINCIJURNAL ON JURNAL."ID" = RINCIJURNAL."KODEJURNAL" WHERE MONTH(JURNAL.TANGGAL) = $P{bulan} AND YEAR(JURNAL.TANGGAL) = $P{tahun} AND RINCIJURNAL.KODEPERKIRAAN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )
+     WHEN 5 THEN
+     IFNULL( SELECT sum(SALDOPERIODE."SALDO") FROM "PUBLIC"."SALDOPERIODE" SALDOPERIODE WHERE LEFT(SALDOPERIODE.PERIODE,4) = (CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun})) AND SUBSTR(SALDOPERIODE.PERIODE,6,2) = (CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1)) AND SALDOPERIODE.KODEAKUN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )+
+     IFNULL( SELECT sum(RINCIJURNAL."DEBET") FROM "PUBLIC"."RINCIJURNAL" RINCIJURNAL INNER JOIN "PUBLIC"."JURNAL" JURNAL ON RINCIJURNAL."KODEJURNAL" = JURNAL."ID" WHERE MONTH(JURNAL.TANGGAL) = $P{bulan} AND YEAR(JURNAL.TANGGAL) = $P{tahun} AND RINCIJURNAL.KODEPERKIRAAN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )-
+     IFNULL( SELECT sum(RINCIJURNAL."KREDIT") FROM "PUBLIC"."JURNAL" JURNAL INNER JOIN "PUBLIC"."RINCIJURNAL" RINCIJURNAL ON JURNAL."ID" = RINCIJURNAL."KODEJURNAL" WHERE MONTH(JURNAL.TANGGAL) = $P{bulan} AND YEAR(JURNAL.TANGGAL) = $P{tahun} AND RINCIJURNAL.KODEPERKIRAAN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )
+     WHEN 6 THEN
+     IFNULL( SELECT sum(SALDOPERIODE."SALDO") FROM "PUBLIC"."SALDOPERIODE" SALDOPERIODE WHERE LEFT(SALDOPERIODE.PERIODE,4) = (CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun})) AND SUBSTR(SALDOPERIODE.PERIODE,6,2) = (CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1)) AND SALDOPERIODE.KODEAKUN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )+
+     IFNULL( SELECT sum(RINCIJURNAL."DEBET") FROM "PUBLIC"."RINCIJURNAL" RINCIJURNAL INNER JOIN "PUBLIC"."JURNAL" JURNAL ON RINCIJURNAL."KODEJURNAL" = JURNAL."ID" WHERE MONTH(JURNAL.TANGGAL) = $P{bulan} AND YEAR(JURNAL.TANGGAL) = $P{tahun} AND RINCIJURNAL.KODEPERKIRAAN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )-
+    IFNULL( SELECT sum(RINCIJURNAL."KREDIT") FROM "PUBLIC"."JURNAL" JURNAL INNER JOIN "PUBLIC"."RINCIJURNAL" RINCIJURNAL ON JURNAL."ID" = RINCIJURNAL."KODEJURNAL" WHERE MONTH(JURNAL.TANGGAL) = $P{bulan} AND YEAR(JURNAL.TANGGAL) = $P{tahun} AND RINCIJURNAL.KODEPERKIRAAN LIKE CONCAT(NERACABANTU.KODEPERKIRAAN,'%'),0 )
+     END,0) as SALDO
+FROM
+     "PUBLIC"."NERACABANTU" NERACABANTU INNER JOIN GRUP ON (NERACABANTU.GRUP=GRUP.KODE)
+WHERE NERACABANTU."GRUP"=4 OR NERACABANTU."GRUP"=5 OR NERACABANTU."GRUP"=6
+ORDER BY NERACABANTU."KODEPERKIRAAN"]]>
+	</queryString>
+	<field name="NERACABANTU_KODEPERKIRAAN" class="java.lang.String"/>
+	<field name="NERACABANTU_NAMAPERKIRAAN" class="java.lang.String"/>
+	<field name="NERACABANTU_GRUP" class="java.lang.Integer"/>
+	<field name="NERACABANTU_TIPE" class="java.lang.String"/>
+	<field name="NAMAGRUP" class="java.lang.String"/>
+	<field name="PENDAPATAN" class="java.lang.Double"/>
+	<field name="HARGAPOKOK" class="java.lang.Double"/>
+	<field name="BIAYA" class="java.lang.Double"/>
+	<field name="LABA" class="java.lang.Double"/>
+	<field name="SALDOAWAL" class="java.lang.Double"/>
+	<field name="DEBET" class="java.lang.Double"/>
+	<field name="KREDIT" class="java.lang.Double"/>
+	<field name="SALDO" class="java.lang.Double"/>
+	<variable name="SALDO_1" class="java.lang.Double" resetType="Group" resetGroup="GRUP" calculation="Sum">
+		<variableExpression><![CDATA[$F{SALDO}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<group name="GRUP">
+		<groupExpression><![CDATA[$F{NERACABANTU_GRUP}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="0" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{NAMAGRUP}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField pattern="#,##0.00">
+					<reportElement x="472" y="0" width="100" height="20"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{SALDO_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="572" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="261" height="23"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Laporan Neraca]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="0" y="23" width="157" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="44" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[Bulan]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="44" width="39" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{bulan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="44" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{tahun}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="572" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="4" y="5" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[No Perk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="5" width="186" height="20"/>
+				<textElement/>
+				<text><![CDATA[Perkiraan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="5" width="82" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="28" width="572" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="397" y="5" width="75" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Kredit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="5" width="79" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Debet]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="5" width="81" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Saldo Awal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="47" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NERACABANTU_KODEPERKIRAAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="0" width="190" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NERACABANTU_NAMAPERKIRAAN}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="237" y="0" width="81" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{SALDOAWAL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="318" y="0" width="79" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{DEBET}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="397" y="0" width="75" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{KREDIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="472" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{SALDO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="15" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="64" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="572" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="369" y="1" width="80" height="20"/>
+				<textElement/>
+				<text><![CDATA[Laba  =]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="472" y="1" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{LABA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

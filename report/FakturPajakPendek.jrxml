@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LapPerFaktur" language="groovy" pageWidth="600" pageHeight="792" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="48" bottomMargin="40">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="198"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1"/>
+	<parameter name="nopajak" class="java.lang.String">
+		<defaultValueExpression><![CDATA["12.000002"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     PENJUALAN."ID" AS PENJUALAN_ID,
+     PENJUALAN."FAKTUR" AS PENJUALAN_FAKTUR,
+     PENJUALAN."TANGGAL" AS PENJUALAN_TANGGAL,
+     PENJUALAN."KODEPELANGGAN" AS PENJUALAN_KODEPELANGGAN,
+     PENJUALAN."CASH" AS PENJUALAN_CASH,
+     PENJUALAN."TGLLUNAS" AS PENJUALAN_TGLLUNAS,
+     PENJUALAN."PPN" AS PENJUALAN_PPN,
+     PENJUALAN."DP" AS PENJUALAN_DP,
+     PENJUALAN."DISKON" AS PENJUALAN_DISKON,
+     RINCIPENJUALAN."IDPENJUALAN" AS RINCIPENJUALAN_IDPENJUALAN,
+     RINCIPENJUALAN."KODEBARANG" AS RINCIPENJUALAN_KODEBARANG,
+     RINCIPENJUALAN."JUMLAH" AS RINCIPENJUALAN_JUMLAH,
+     RINCIPENJUALAN."HARGA" AS RINCIPENJUALAN_HARGA,
+     RINCIPENJUALAN."DISKON" AS RINCIPENJUALAN_DISKON,
+     RINCIPENJUALAN."TOTAL" AS RINCIPENJUALAN_TOTAL,
+     PELANGGAN."KODEPELANGGAN" AS PELANGGAN_KODEPELANGGAN,
+     PELANGGAN."NAMA" AS PELANGGAN_NAMA,
+     PELANGGAN."ALAMAT" AS PELANGGAN_ALAMAT,
+     PELANGGAN."HP" AS PELANGGAN_HP,
+     PELANGGAN."TGLREG" AS PELANGGAN_TGLREG,
+     PELANGGAN."BATASKREDIT" AS PELANGGAN_BATASKREDIT,
+     BARANG."KODEBARANG" AS BARANG_KODEBARANG,
+     BARANG."NAMABARANG" AS BARANG_NAMABARANG,
+     BARANG."SATUAN" AS BARANG_SATUAN,
+     BARANG."HARGA" AS BARANG_HARGA,
+     BARANG."KODEAKUN" AS BARANG_KODEAKUN,
+     BARANG."PENDAPATAN_ACC" AS BARANG_PENDAPATAN_ACC,
+     BARANG."COGS_ACC" AS BARANG_COGS_ACC,
+     BARANG."COGS" AS BARANG_COGS,
+     BARANG."STOK" AS BARANG_STOK,
+     BARANG."IDJENIS" AS BARANG_IDJENIS,
+     RINCIPENJUALAN."PPN" AS RINCIPENJUALAN_PPN,
+     (RINCIPENJUALAN.JUMLAH * RINCIPENJUALAN.HARGA) - ((RINCIPENJUALAN.DISKON / 100) * (RINCIPENJUALAN.JUMLAH * RINCIPENJUALAN.HARGA)) AS TOTDIS,((RINCIPENJUALAN.JUMLAH * RINCIPENJUALAN.HARGA) - ((RINCIPENJUALAN.DISKON / 100) * (RINCIPENJUALAN.JUMLAH * RINCIPENJUALAN.HARGA))) * (RINCIPENJUALAN.PPN / 100) as PPNTOT,JENISBARANG.JENIS AS JENISBARANG_JENIS,PENJUALAN.IDSALES AS PENJUALAN_IDSALES,PAJAK.NOPAJAK,PELANGGAN."NPWP" AS PELANGGAN_NPWP,(RINCIPENJUALAN.JUMLAH * RINCIPENJUALAN.HARGA) AS JumTot,(RINCIPENJUALAN.JUMLAH * RINCIPENJUALAN.HARGA) * (RINCIPENJUALAN.DISKON / 100) AS TOTdiskon
+FROM
+     "PUBLIC"."RINCIPENJUALAN" RINCIPENJUALAN INNER JOIN "PUBLIC"."PENJUALAN" PENJUALAN ON RINCIPENJUALAN."IDPENJUALAN" = PENJUALAN."ID"
+     INNER JOIN "PUBLIC"."PELANGGAN" PELANGGAN ON PENJUALAN."KODEPELANGGAN" = PELANGGAN."KODEPELANGGAN"
+     INNER JOIN "PUBLIC"."BARANG" BARANG ON RINCIPENJUALAN."KODEBARANG" = BARANG."KODEBARANG"
+     INNER JOIN "PUBLIC"."JENISBARANG" JENISBARANG ON BARANG."IDJENIS" = JENISBARANG."ID"
+     INNER JOIN "PUBLIC"."PAJAK" PAJAK ON PENJUALAN."ID" = PAJAK."IDJUAL"
+WHERE
+     PAJAK."NOPAJAK" = $P{nopajak}
+GROUP BY RINCIPENJUALAN."KODEBARANG"]]>
+	</queryString>
+	<field name="PENJUALAN_ID" class="java.lang.Integer"/>
+	<field name="PENJUALAN_FAKTUR" class="java.lang.String"/>
+	<field name="PENJUALAN_TANGGAL" class="java.sql.Date"/>
+	<field name="PENJUALAN_KODEPELANGGAN" class="java.lang.String"/>
+	<field name="PENJUALAN_CASH" class="java.lang.String"/>
+	<field name="PENJUALAN_TGLLUNAS" class="java.sql.Date"/>
+	<field name="PENJUALAN_PPN" class="java.lang.Double"/>
+	<field name="PENJUALAN_DP" class="java.lang.Double"/>
+	<field name="PENJUALAN_DISKON" class="java.lang.Double"/>
+	<field name="RINCIPENJUALAN_IDPENJUALAN" class="java.lang.Integer"/>
+	<field name="RINCIPENJUALAN_KODEBARANG" class="java.lang.String"/>
+	<field name="RINCIPENJUALAN_JUMLAH" class="java.lang.Integer"/>
+	<field name="RINCIPENJUALAN_HARGA" class="java.lang.Double"/>
+	<field name="RINCIPENJUALAN_DISKON" class="java.lang.Double"/>
+	<field name="RINCIPENJUALAN_TOTAL" class="java.lang.Double"/>
+	<field name="PELANGGAN_KODEPELANGGAN" class="java.lang.String"/>
+	<field name="PELANGGAN_NAMA" class="java.lang.String"/>
+	<field name="PELANGGAN_ALAMAT" class="java.lang.String"/>
+	<field name="PELANGGAN_HP" class="java.lang.String"/>
+	<field name="PELANGGAN_TGLREG" class="java.sql.Date"/>
+	<field name="PELANGGAN_BATASKREDIT" class="java.lang.Double"/>
+	<field name="BARANG_KODEBARANG" class="java.lang.String"/>
+	<field name="BARANG_NAMABARANG" class="java.lang.String"/>
+	<field name="BARANG_SATUAN" class="java.lang.String"/>
+	<field name="BARANG_HARGA" class="java.lang.Double"/>
+	<field name="BARANG_KODEAKUN" class="java.lang.String"/>
+	<field name="BARANG_PENDAPATAN_ACC" class="java.lang.String"/>
+	<field name="BARANG_COGS_ACC" class="java.lang.String"/>
+	<field name="BARANG_COGS" class="java.lang.Double"/>
+	<field name="BARANG_STOK" class="java.lang.Integer"/>
+	<field name="BARANG_IDJENIS" class="java.lang.String"/>
+	<field name="RINCIPENJUALAN_PPN" class="java.lang.Double"/>
+	<field name="TOTDIS" class="java.lang.Double"/>
+	<field name="PPNTOT" class="java.lang.Double"/>
+	<field name="JENISBARANG_JENIS" class="java.lang.String"/>
+	<field name="PENJUALAN_IDSALES" class="java.lang.String"/>
+	<field name="NOPAJAK" class="java.lang.String"/>
+	<field name="PELANGGAN_NPWP" class="java.lang.String"/>
+	<field name="JUMTOT" class="java.lang.Double"/>
+	<field name="TOTDISKON" class="java.lang.Double"/>
+	<variable name="total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{JUMTOT}]]></variableExpression>
+	</variable>
+	<variable name="TotDisk" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTDISKON}]]></variableExpression>
+	</variable>
+	<variable name="TotKenaPajak" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{total}-$V{TotDisk}]]></variableExpression>
+	</variable>
+	<variable name="TotPajak" class="java.lang.Double">
+		<variableExpression><![CDATA[0.1 * $V{TotKenaPajak}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="110" splitType="Stretch">
+			<textField>
+				<reportElement x="166" y="0" width="169" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NOPAJAK}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="119" splitType="Stretch">
+			<textField>
+				<reportElement x="166" y="36" width="371" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PELANGGAN_NAMA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="48" width="372" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PELANGGAN_ALAMAT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="60" width="371" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PELANGGAN_NPWP}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="41" y="0" width="361" height="12" forecolor="#000000"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BARANG_NAMABARANG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="0" width="23" height="12" forecolor="#000000"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="408" y="0" width="129" height="12" forecolor="#000000"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JUMTOT}]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="11" width="100" height="1">
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT}.longValue() % 20 == 0]]></printWhenExpression>
+				</reportElement>
+			</break>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="220">
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="448" y="72" width="100" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="422" y="161" width="100" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="9" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[H. Elfa Zahar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="173" width="100" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Direktur.]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="408" y="0" width="129" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="408" y="11" width="129" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotDisk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="408" y="35" width="129" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotKenaPajak}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="408" y="48" width="129" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotPajak}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jurnal" language="groovy" pageWidth="600" pageHeight="842" columnWidth="535" leftMargin="45" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8093f085-6e8d-4870-9c49-6339e5ba09bb">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="BULAN" class="java.lang.String">
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TAHUN" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2012"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     JURNAL."KODEJURNAL" AS JURNAL_KODEJURNAL,
+     JURNAL."TANGGAL" AS JURNAL_TANGGAL,
+     JURNAL."DESKRIPSI" AS JURNAL_DESKRIPSI,
+     RINCIJURNAL."KODEPERKIRAAN" AS RINCIJURNAL_KODEPERKIRAAN,
+     RINCIJURNAL."DEBET" AS RINCIJURNAL_DEBET,
+     RINCIJURNAL."KREDIT" AS RINCIJURNAL_KREDIT,
+     RINCIJURNAL."NO" AS RINCIJURNAL_NO,
+     RINCIJURNAL."KODEJURNAL" AS RINCIJURNAL_KODEJURNAL,
+     PERKIRAAN."NAMAPERKIRAAN" AS PERKIRAAN_NAMAPERKIRAAN
+FROM
+     "PUBLIC"."JURNAL" JURNAL INNER JOIN "PUBLIC"."RINCIJURNAL" RINCIJURNAL ON JURNAL."ID" = RINCIJURNAL."KODEJURNAL"
+     INNER JOIN "PUBLIC"."PERKIRAAN" PERKIRAAN ON RINCIJURNAL."KODEPERKIRAAN" = PERKIRAAN."KODEPERKIRAAN"
+WHERE
+     MONTH(JURNAL.TANGGAL) = $P{BULAN}
+ AND YEAR(JURNAL.TANGGAL) = $P{TAHUN} order by JURNAL."ID"]]>
+	</queryString>
+	<field name="JURNAL_KODEJURNAL" class="java.lang.String"/>
+	<field name="JURNAL_TANGGAL" class="java.sql.Date"/>
+	<field name="JURNAL_DESKRIPSI" class="java.lang.String"/>
+	<field name="RINCIJURNAL_KODEPERKIRAAN" class="java.lang.String"/>
+	<field name="RINCIJURNAL_DEBET" class="java.lang.Double"/>
+	<field name="RINCIJURNAL_KREDIT" class="java.lang.Double"/>
+	<field name="RINCIJURNAL_NO" class="java.lang.Integer"/>
+	<field name="RINCIJURNAL_KODEJURNAL" class="java.lang.Integer"/>
+	<field name="PERKIRAAN_NAMAPERKIRAAN" class="java.lang.String"/>
+	<variable name="RINCIJURNAL_DEBET_1" class="java.lang.Double" resetType="Group" resetGroup="KODEJURNAL" calculation="Sum">
+		<variableExpression><![CDATA[$F{RINCIJURNAL_DEBET}]]></variableExpression>
+	</variable>
+	<variable name="RINCIJURNAL_KREDIT_1" class="java.lang.Double" resetType="Group" resetGroup="KODEJURNAL" calculation="Sum">
+		<variableExpression><![CDATA[$F{RINCIJURNAL_KREDIT}]]></variableExpression>
+	</variable>
+	<variable name="RINCIJURNAL_DEBET_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{RINCIJURNAL_DEBET}]]></variableExpression>
+	</variable>
+	<variable name="RINCIJURNAL_KREDIT_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{RINCIJURNAL_KREDIT}]]></variableExpression>
+	</variable>
+	<group name="KODEJURNAL">
+		<groupExpression><![CDATA[$F{JURNAL_KODEJURNAL}]]></groupExpression>
+		<groupHeader>
+			<band height="12">
+				<textField>
+					<reportElement uuid="d8d7e5ee-600a-4aae-b5d8-034efbcaf192" x="148" y="0" width="384" height="12"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{JURNAL_DESKRIPSI}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement uuid="84008787-53c5-400e-9b1f-4555edcf7e2c" x="87" y="0" width="47" height="12"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{JURNAL_TANGGAL}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="ff8b00e6-5f2f-465a-a24f-4b6981993b74" x="0" y="0" width="87" height="12"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{JURNAL_KODEJURNAL}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="12">
+				<textField pattern="#,##0">
+					<reportElement uuid="dc1bf44e-948c-44c0-b5f0-cea03c2dfb22" x="332" y="0" width="100" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{RINCIJURNAL_DEBET_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement uuid="cedbcdab-d163-4375-be0a-8563fa36beff" x="432" y="0" width="100" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{RINCIJURNAL_KREDIT_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="16fd1d3d-3b41-4128-9ed1-f50dc99e18f4" x="330" y="0" width="205" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3385c550-6236-42f2-939a-cb5a57cca0ad" x="2" y="32" width="52" height="17"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periode  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="cb142818-8a9a-4c51-b002-c92727d16024" x="55" y="32" width="22" height="17"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BULAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="abbdf7c0-c7eb-4415-ad3a-70754dcfa586" x="87" y="32" width="100" height="17"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TAHUN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="dbdbb9e6-a276-40ff-a1ee-a181d13e224c" x="77" y="32" width="10" height="17"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8df0d7f3-3253-45a6-88dc-783800562d44" x="2" y="0" width="258" height="17"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CV.MIRANTI ADILHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1adee189-771b-4006-8d89-232f5036befb" x="2" y="16" width="258" height="17"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Jurnal Per Bulan]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d4442280-02e8-4d6a-b669-13d13fbae962" x="0" y="0" width="120" height="13"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[Kode Perkiraan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="39dea3d1-b2aa-4cef-8e2a-c10fc5750e75" x="332" y="0" width="100" height="13"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Debet]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b87f5a49-9979-4771-8c39-a2552ff608af" x="432" y="0" width="100" height="13"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Kredit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dccccbc9-a61c-4abf-9f98-1139640828f2" x="134" y="0" width="196" height="13"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[Nama Perkiraan]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5bc09251-e16d-4d6d-b3d2-7ba5b6b49498" x="0" y="0" width="535" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="41c2b943-aa48-4018-97e0-7b7a7270c2a3" x="0" y="13" width="535" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f6eb124e-a427-41be-a993-ee5ce5991778" x="16" y="0" width="71" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RINCIJURNAL_KODEPERKIRAAN}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="ece5e55f-7bd9-49b6-8375-26406e74fd79" x="332" y="0" width="100" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RINCIJURNAL_DEBET}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="8713b56c-1962-4cd9-a8c7-cec777bc6b8b" x="432" y="0" width="100" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RINCIJURNAL_KREDIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5acb099f-4325-4585-b93f-85b6e8ec8057" x="87" y="0" width="243" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PERKIRAAN_NAMAPERKIRAAN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a329cc8f-12dc-4ea9-9bc5-74d3b3217fca" x="180" y="0" width="80" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="91c8ad2c-1d18-4645-ab64-bd11bdd21f17" x="260" y="0" width="40" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="c5f90c7f-6933-47bd-8c5b-544f9ba8d53a" x="409" y="0" width="123" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement uuid="ed6f80fb-3590-4446-a040-b7ff0942d4b5" x="0" y="0" width="535" height="1"/>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement uuid="faf26ef7-3378-42ca-abb1-17ec23e5af46" x="331" y="1" width="100" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{RINCIJURNAL_DEBET_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="3cdc6dfd-f19c-48fb-b514-dc9f373a78f9" x="431" y="1" width="100" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{RINCIJURNAL_KREDIT_2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

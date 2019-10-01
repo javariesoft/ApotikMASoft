@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LapStoryStok" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Pkdbarang" class="java.lang.String">
+		<defaultValueExpression><![CDATA["%"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bulan" class="java.lang.String">
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tahun" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2012"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     case KODETRANS when 'J'then 'Penjualan'when 'B'then 'Pembelian'when 'R'then 'Return Jual'when 'K'then 'Return Beli'end AS Transaksi,
+     STOK."IDPENJUALAN" AS STOK_IDPENJUALAN,
+     STOK."KODEBARANG" AS STOK_KODEBARANG,
+     STOK."TANGGAL" AS STOK_TANGGAL,
+     STOK."IN" AS STOK_IN,
+     STOK."OUT" AS STOK_OUT,
+     STOK."KODETRANS" AS STOK_KODETRANS,
+     BARANG."KODEBARANG" AS BARANG_KODEBARANG,
+     BARANG."NAMABARANG" AS BARANG_NAMABARANG,
+     BARANG."SATUAN" AS BARANG_SATUAN,
+     BARANG."HARGA" AS BARANG_HARGA,
+     BARANG."KODEAKUN" AS BARANG_KODEAKUN,
+     BARANG."PENDAPATAN_ACC" AS BARANG_PENDAPATAN_ACC,
+     BARANG."COGS_ACC" AS BARANG_COGS_ACC,
+     BARANG."COGS" AS BARANG_COGS,
+     BARANG."STOK" AS BARANG_STOK,
+     BARANG."IDSUPPLIER" AS BARANG_IDSUPPLIER,
+     BARANG."IDJENIS" AS BARANG_IDJENIS
+FROM
+     "PUBLIC"."BARANG" BARANG INNER JOIN "PUBLIC"."STOK" STOK ON BARANG."KODEBARANG" = STOK."KODEBARANG"
+WHERE
+     STOK."KODEBARANG" LIKE $P{Pkdbarang}
+ AND MONTH(STOK.TANGGAL) = $P{bulan}
+ AND YEAR(STOK.TANGGAL) = $P{tahun}
+ORDER BY
+     STOK."TANGGAL" ASC]]>
+	</queryString>
+	<field name="TRANSAKSI" class="java.lang.String"/>
+	<field name="STOK_IDPENJUALAN" class="java.lang.Integer"/>
+	<field name="STOK_KODEBARANG" class="java.lang.String"/>
+	<field name="STOK_TANGGAL" class="java.sql.Date"/>
+	<field name="STOK_IN" class="java.lang.Integer"/>
+	<field name="STOK_OUT" class="java.lang.Integer"/>
+	<field name="STOK_KODETRANS" class="java.lang.String"/>
+	<field name="BARANG_KODEBARANG" class="java.lang.String"/>
+	<field name="BARANG_NAMABARANG" class="java.lang.String"/>
+	<field name="BARANG_SATUAN" class="java.lang.String"/>
+	<field name="BARANG_HARGA" class="java.lang.Double"/>
+	<field name="BARANG_KODEAKUN" class="java.lang.String"/>
+	<field name="BARANG_PENDAPATAN_ACC" class="java.lang.String"/>
+	<field name="BARANG_COGS_ACC" class="java.lang.String"/>
+	<field name="BARANG_COGS" class="java.lang.Double"/>
+	<field name="BARANG_STOK" class="java.lang.Integer"/>
+	<field name="BARANG_IDSUPPLIER" class="java.lang.String"/>
+	<field name="BARANG_IDJENIS" class="java.lang.String"/>
+	<variable name="STOK_IN_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{STOK_IN}]]></variableExpression>
+	</variable>
+	<variable name="STOK_OUT_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{STOK_OUT}]]></variableExpression>
+	</variable>
+	<variable name="awal" class="java.lang.Integer" resetType="Column">
+		<variableExpression><![CDATA[$F{BARANG_STOK} - $V{STOK_IN_1} + $V{STOK_OUT_1}]]></variableExpression>
+	</variable>
+	<variable name="STOK_OUT_2" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{STOK_OUT}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="6" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="194" height="22"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Laporan History Stock Barang]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="0" y="22" width="144" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="361" y="53" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="53" width="163" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="50" width="555" height="21"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="36" y="53" width="149" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="53" width="30" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="461" y="53" width="88" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jenis Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="53" width="87" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Masuk ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="53" width="87" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Keluar]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="114" y="12" width="153" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{STOK_KODEBARANG}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="12" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[Kode Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="12" width="10" height="16"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="28" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="28" width="10" height="16"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="114" y="28" width="153" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{BARANG_NAMABARANG}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="16"/>
+			</rectangle>
+			<textField>
+				<reportElement x="2" y="0" width="30" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="187" y="-22" width="1" height="37"/>
+			</line>
+			<line>
+				<reportElement x="280" y="-22" width="1" height="37"/>
+			</line>
+			<line>
+				<reportElement x="33" y="-22" width="1" height="37"/>
+			</line>
+			<line>
+				<reportElement x="373" y="-22" width="1" height="37"/>
+			</line>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="36" y="0" width="149" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{STOK_TANGGAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="87" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{STOK_IN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="0" width="87" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{STOK_OUT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="461" y="0" width="88" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{TRANSAKSI}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="2" width="132" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Powered By JavarieSoft]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="215" y="2" width="80" height="16"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="295" y="2" width="40" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="64" splitType="Stretch">
+			<textField>
+				<reportElement x="191" y="0" width="86" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{STOK_IN_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="506" y="4" width="43" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BARANG_STOK}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[Stok Awal]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="280" y="0" width="93" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{STOK_OUT_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="407" y="0" width="67" height="16"/>
+				<textElement/>
+				<text><![CDATA[Stok Akhir]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="114" y="0" width="43" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{awal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

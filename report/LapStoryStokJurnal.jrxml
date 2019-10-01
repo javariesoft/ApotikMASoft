@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LapStoryStok" language="groovy" pageWidth="600" pageHeight="842" columnWidth="535" leftMargin="45" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="d2d93dc3-8bde-4f8f-bd5a-491ed8e4def9">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="6"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Pkdbarang" class="java.lang.String">
+		<defaultValueExpression><![CDATA["00001"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bulan" class="java.lang.String">
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tahun" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2012"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     case KODETRANS when 'J' then (SELECT PENJUALAN."FAKTUR" AS PENJUALAN_FAKTUR FROM "PUBLIC"."PENJUALAN" PENJUALAN WHERE PENJUALAN.ID = STOK."IDPENJUALAN")
+     when 'B' then (SELECT
+     PEMBELIAN."NOFAKTUR" AS PEMBELIAN_NOFAKTUR
+FROM
+     "PUBLIC"."PEMBELIAN" PEMBELIAN
+WHERE
+     PEMBELIAN.ID =STOK."IDPENJUALAN")
+     when 'R' then (SELECT
+     RETUR."KODERETUR" AS RETUR_KODERETUR
+FROM
+     "PUBLIC"."RETUR" RETUR
+WHERE
+     RETUR.ID = STOK."IDPENJUALAN")
+     when 'K' then (SELECT
+     RETURBELI."KODERETURBELI" AS RETURBELI_KODERETURBELI
+FROM
+     "PUBLIC"."RETURBELI" RETURBELI
+WHERE
+     RETURBELI.ID = STOK."IDPENJUALAN")
+when 'D' then (SELECT DO."KODEDO" AS DO_KODEDO FROM "PUBLIC"."DO" DO WHERE DO.ID = STOK."IDPENJUALAN")
+     when 'E' then (SELECT DO."KODEDO" AS DO_KODEDO FROM "PUBLIC"."DO" DO WHERE DO.ID = STOK."IDPENJUALAN")
+when 'Z' then '0'
+     end AS NOREF,
+case KODETRANS when 'J' then (SELECT
+     PELANGGAN."NAMA" AS PELANGGAN_NAMA
+FROM
+     "PUBLIC"."PELANGGAN" PELANGGAN INNER JOIN "PUBLIC"."PENJUALAN" PENJUALAN ON PELANGGAN."KODEPELANGGAN" = PENJUALAN."KODEPELANGGAN"
+WHERE
+     PENJUALAN.ID = STOK."IDPENJUALAN")
+     when 'B' then (SELECT
+     SUPPLIER."NAMA" AS SUPPLIER_NAMA
+FROM
+     "PUBLIC"."SUPPLIER" SUPPLIER INNER JOIN "PUBLIC"."PEMBELIAN" PEMBELIAN ON SUPPLIER."IDSUPPLIER" = PEMBELIAN."IDSUPPLIER"
+WHERE
+     PEMBELIAN.ID	 = STOK."IDPENJUALAN")
+     when 'R' then (SELECT
+     PELANGGAN."NAMA" AS PELANGGAN_NAMA
+FROM
+     "PUBLIC"."PELANGGAN" PELANGGAN INNER JOIN "PUBLIC"."RETUR" RETUR ON PELANGGAN."KODEPELANGGAN" = RETUR."KODEPELANGGAN"
+WHERE
+     RETUR.ID = STOK."IDPENJUALAN")
+     when 'K' then (SELECT
+     SUPPLIER."NAMA" AS SUPPLIER_NAMA
+FROM
+     "PUBLIC"."SUPPLIER" SUPPLIER INNER JOIN "PUBLIC"."RETURBELI" RETURBELI ON SUPPLIER."IDSUPPLIER" = RETURBELI."IDSUPPLIER"
+WHERE
+     RETURBELI.ID = STOK."IDPENJUALAN")
+when 'D' then (SELECT PELANGGAN."NAMA" AS PELANGGAN_NAMA FROM "PUBLIC"."PELANGGAN" PELANGGAN INNER JOIN "PUBLIC"."DO" DO ON PELANGGAN."KODEPELANGGAN" = DO."KODEPELANGGAN" WHERE DO.ID = STOK."IDPENJUALAN")
+when 'E' then (SELECT PELANGGAN."NAMA" AS PELANGGAN_NAMA FROM "PUBLIC"."PELANGGAN" PELANGGAN INNER JOIN "PUBLIC"."DO" DO ON PELANGGAN."KODEPELANGGAN" = DO."KODEPELANGGAN" WHERE DO.ID = STOK."IDPENJUALAN")
+when 'Z' then 'Stok'
+     end AS JenisTrans,
+     STOK."IDPENJUALAN" AS STOK_IDPENJUALAN,
+     STOK."KODEBARANG" AS STOK_KODEBARANG,
+     STOK."TANGGAL" AS STOK_TANGGAL,
+     STOK."IN" AS STOK_IN,
+     STOK."OUT" AS STOK_OUT,
+     STOK."KODETRANS" AS STOK_KODETRANS,
+     BARANG."KODEBARANG" AS BARANG_KODEBARANG,
+     BARANG."NAMABARANG" AS BARANG_NAMABARANG,
+     BARANG."SATUAN" AS BARANG_SATUAN,
+     BARANG."HARGA" AS BARANG_HARGA,
+     BARANG."KODEAKUN" AS BARANG_KODEAKUN,
+     BARANG."PENDAPATAN_ACC" AS BARANG_PENDAPATAN_ACC,
+     BARANG."COGS_ACC" AS BARANG_COGS_ACC,
+     BARANG."COGS" AS BARANG_COGS,
+     BARANG."STOK" AS BARANG_STOK,
+     BARANG."IDJENIS" AS BARANG_IDJENIS,
+     ifnull((select STOKPERIODE.JUMLAH from STOKPERIODE
+where STOKPERIODE.KODEBARANG=BARANG.KODEBARANG
+and LEFT(STOKPERIODE.PERIODE,4) = (CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun}))
+and SUBSTR(STOKPERIODE.PERIODE,6,2) = (CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1))
+),0) as stokawal,
+case KODETRANS
+     when 'J' then (SELECT JURNAL."DESKRIPSI" AS JURNAL_DESKRIPSI FROM "PUBLIC"."JURNAL" JURNAL,PENJUALAN WHERE  STOK.IDPENJUALAN=PENJUALAN.ID AND JURNAL.KODEJURNAL = PENJUALAN."FAKTUR")
+     when 'B' then (SELECT JURNAL."DESKRIPSI" AS JURNAL_DESKRIPSI FROM "PUBLIC"."JURNAL" JURNAL,PEMBELIAN WHERE STOK.IDPENJUALAN=PEMBELIAN.ID AND JURNAL.KODEJURNAL = PEMBELIAN."NOFAKTUR")
+     when 'R' then 'Return Jual'
+     when 'K' then 'Return Beli'
+     when 'D' then 'Open DO'
+     when 'E' then 'Close DO'
+     when 'Z' then 'Koreksi'
+     end AS kode,JENISBARANG.JENIS AS JENISBARANG_JENIS
+FROM
+     "PUBLIC"."BARANG" BARANG INNER JOIN "PUBLIC"."STOK" STOK ON BARANG."KODEBARANG" = STOK."KODEBARANG"
+     INNER JOIN "PUBLIC"."JENISBARANG" JENISBARANG ON BARANG."IDJENIS" = JENISBARANG."ID"
+WHERE
+     STOK."KODEBARANG" = $P{Pkdbarang}
+ AND MONTH(STOK.TANGGAL) = $P{bulan}
+ AND YEAR(STOK.TANGGAL) = $P{tahun}
+ORDER BY
+     STOK."TANGGAL",STOK."IDPENJUALAN",8 ASC]]>
+	</queryString>
+	<field name="NOREF" class="java.lang.String"/>
+	<field name="JENISTRANS" class="java.lang.String"/>
+	<field name="STOK_IDPENJUALAN" class="java.lang.Integer"/>
+	<field name="STOK_KODEBARANG" class="java.lang.String"/>
+	<field name="STOK_TANGGAL" class="java.sql.Date"/>
+	<field name="STOK_IN" class="java.lang.Integer"/>
+	<field name="STOK_OUT" class="java.lang.Integer"/>
+	<field name="STOK_KODETRANS" class="java.lang.String"/>
+	<field name="BARANG_KODEBARANG" class="java.lang.String"/>
+	<field name="BARANG_NAMABARANG" class="java.lang.String"/>
+	<field name="BARANG_SATUAN" class="java.lang.String"/>
+	<field name="BARANG_HARGA" class="java.lang.Double"/>
+	<field name="BARANG_KODEAKUN" class="java.lang.String"/>
+	<field name="BARANG_PENDAPATAN_ACC" class="java.lang.String"/>
+	<field name="BARANG_COGS_ACC" class="java.lang.String"/>
+	<field name="BARANG_COGS" class="java.lang.Double"/>
+	<field name="BARANG_STOK" class="java.lang.Integer"/>
+	<field name="BARANG_IDJENIS" class="java.lang.String"/>
+	<field name="STOKAWAL" class="java.lang.Integer"/>
+	<field name="KODE" class="java.lang.String"/>
+	<field name="JENISBARANG_JENIS" class="java.lang.String"/>
+	<variable name="STOK_IN_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{STOK_IN}]]></variableExpression>
+	</variable>
+	<variable name="STOK_OUT_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{STOK_OUT}]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.String">
+		<variableExpression><![CDATA[($F{STOKAWAL} + $V{STOK_IN_1}) - $V{STOK_OUT_1}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="4" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5d0acbfb-fc7b-4ffb-81b3-b0e565e24563" x="44" y="37" width="10" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c6768485-2573-420b-8661-fff982eb9598" x="3" y="37" width="40" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Periode]]></text>
+			</staticText>
+			<textField pattern="MMMMM-yyyy">
+				<reportElement uuid="34299804-0ebc-4b1f-bd0e-e30fb400ee2c" x="54" y="37" width="114" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STOK_TANGGAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3bab388d-56a3-4000-943e-057efc4cfffe" x="3" y="19" width="261" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan History Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d5d41ab0-18ea-46d7-bb3d-9de86bb057a4" x="4" y="1" width="243" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CV.MIRANTI ADILHA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="74" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="151eaf77-ce12-4c1d-ba01-4a8ca14edc10" x="0" y="57" width="555" height="16"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="84f261b8-5959-4e87-aa02-0073272e97a5" x="361" y="39" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d4b936e7-eacf-4d21-8dc0-7b5e1e4bcc28" x="144" y="39" width="163" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="4ac173f5-fc6a-47a9-984d-b8f111ad5d70" x="0" y="36" width="555" height="21"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="76adf992-c338-468d-a73d-871e51447402" x="36" y="39" width="55" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="07721e3a-f2f9-487f-8988-e0c341041434" x="2" y="39" width="30" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c709b521-8190-4767-97bd-efc5719cba29" x="165" y="39" width="192" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jenis Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9491bc99-ef80-4e6d-92e6-62b684cd1905" x="436" y="39" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Masuk ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e81b8cd-67ee-422b-b0c6-adb86778d604" x="476" y="39" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Keluar]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1a33212e-9bfe-4bcd-af1a-d0878ed52528" x="85" y="1" width="153" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STOK_KODEBARANG}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b4632f15-e6c3-4597-abd1-f9ca1f160315" x="2" y="1" width="71" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Kode Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8517afab-1a09-4fe3-80e1-f60727358e76" x="74" y="1" width="10" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cb47df6b-d9bf-4df1-9fce-0431ca1d3256" x="2" y="17" width="71" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6425ec4d-bf94-4ecf-a8b3-e84d4401f06a" x="74" y="17" width="10" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="fbfd649c-16de-4bda-8a25-de1b7ab417ce" x="85" y="17" width="261" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BARANG_NAMABARANG}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7e70fa5d-8a8c-49a7-9386-27a5311f7b08" x="227" y="58" width="68" height="16"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stok Awal    :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="272c0a2a-3a8b-457f-aecc-a2d211ebac96" x="516" y="58" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STOKAWAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="610f782e-5ced-41fc-8341-c86fdc18b589" x="516" y="39" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a399f5ec-4561-4548-9f18-89e46bd728a2" x="91" y="39" width="70" height="16"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No Faktur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd2c17db-6d42-4326-b0d7-22a40fec7e2b" x="361" y="17" width="24" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Merk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9f9a002a-df8f-4da4-b789-df7e8bfa06ab" x="385" y="17" width="10" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="48282440-5ec0-4692-81c4-bf7e462ec338" x="395" y="17" width="160" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JENISBARANG_JENIS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="5f332288-4656-46c1-bc3b-a48aee53d526" x="0" y="-1" width="555" height="17"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="d2235047-fa29-44f9-bbee-8b8e3ff137e0" x="2" y="0" width="30" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="74bc1c7f-f991-4457-b392-722dc2445fd4" x="90" y="-1" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement uuid="1a703285-4e68-4f7e-93e3-4dc963a34455" x="164" y="-1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement uuid="49620b8a-b508-44e2-b10b-9807bd257b21" x="434" y="-38" width="1" height="53"/>
+			</line>
+			<line>
+				<reportElement uuid="37952cef-74f9-4222-be7c-3f92040b09e7" x="33" y="-1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement uuid="e83b729b-305a-4085-b0ab-a4ee77f246c0" x="473" y="-38" width="1" height="53"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="59ea5c41-47a1-452d-acee-f4bc1ad37691" x="36" y="0" width="54" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STOK_TANGGAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b5930900-830a-4516-82da-f883f14db0b7" x="476" y="0" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STOK_OUT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="651a493b-410c-4db1-bf89-2c6f366a1b26" x="513" y="-38" width="1" height="54"/>
+			</line>
+			<textField>
+				<reportElement uuid="b4f3c037-9a72-4b54-b567-ff525f01e7c4" x="516" y="0" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="db8e1e4b-43eb-46c2-9dc9-c1f1daf44aaf" x="436" y="0" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STOK_IN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="edebe9a5-410e-4a81-8d91-b4100bc34aa1" x="95" y="0" width="66" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOREF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="00c0c981-208c-4968-b375-0809b6bc1a3b" x="168" y="0" width="263" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KODE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e491ec51-a141-40ea-a11f-03756f9845a4" x="3" y="2" width="132" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Powered By JavarieSoft]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="0e02cc3e-7365-4acc-bcf2-e859e4aac31b" x="431" y="2" width="120" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="9d363a69-f8fb-4705-9f1d-365f3f1fe0f9" x="513" y="0" width="42" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="09d95176-117a-4df1-b2d7-1cdbf80de2ca" x="473" y="0" width="40" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="18a539e3-a6c9-40e8-8fe8-93df656d272a" x="434" y="0" width="39" height="16"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="b8f62442-4c79-4d85-9829-c9eeeaffe316" x="436" y="0" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{STOK_IN_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="950c78a9-4d90-4889-a2a5-619334686a8f" x="516" y="0" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9b8757de-580f-4cd1-a646-711ed0b8fb12" x="476" y="0" width="35" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{STOK_OUT_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RekapAnalisaPiutangAllPelanggan" pageWidth="595" pageHeight="842" columnWidth="530" leftMargin="45" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc47c018-6436-4a33-a1b8-e60b71646102">
+	<property name="ireport.zoom" value="2.1961500000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="2"/>
+	<queryString>
+		<![CDATA[select KODEPELANGGAN,NAMA,ALAMAT,ifnull((select sum(vp.JUMLAH - vp.JUMLAHBAYAR) from view_piutang vp
+where vp.idpelanggan=pelanggan.kodepelanggan),0) AS TOTPIUTANG from PELANGGAN where STATUSCABANG<>'1' order by NAMA]]>
+	</queryString>
+	<field name="KODEPELANGGAN" class="java.lang.String"/>
+	<field name="NAMA" class="java.lang.String"/>
+	<field name="ALAMAT" class="java.lang.String"/>
+	<field name="TOTPIUTANG" class="java.lang.Double"/>
+	<variable name="VtotalSisa" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTPIUTANG}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4ed030ec-cbe0-4eb6-ac85-054ac1ca499c" x="1" y="0" width="353" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CV.MIRANTI ADILHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7a7bbd6c-eacb-43f9-9c01-f52995dc0e6e" x="1" y="18" width="353" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REKAPITULASI PIUTANG PELANGGAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="45eb9f99-df71-4188-b41a-9025fea12fd6" x="1" y="36" width="68" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Per Tanggal ]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="6d0ca2d8-1458-4c08-aad3-a6f638be81e5" x="69" y="36" width="178" height="16"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="c556f55f-ae68-465a-8ac0-5c1740fd5bc8" x="1" y="4" width="529" height="18" backcolor="#FFCC99"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="91e05ff6-5e99-4404-880d-9133572c81fd" x="423" y="5" width="104" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[SISA PIUTANG]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5cf246a7-48e1-4cdf-a8da-dce735c9bd88" x="0" y="3" width="530" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="a8b61711-4b91-4261-9cf6-0d47402fa82e" x="1" y="22" width="528" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="e81bbe23-19cf-4d29-af80-8a70fd0c39e8" x="0" y="5" width="32" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd006823-0f29-4b1b-a64c-19e1d2ca7383" x="36" y="5" width="155" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Nama Pelanggan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e03b8a2-0fe2-48b4-aae7-8cf874887d0e" x="196" y="5" width="222" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<line>
+				<reportElement uuid="2d8baa03-7ad5-4fb5-8f43-47ad474ad418" x="0" y="-19" width="1" height="32"/>
+			</line>
+			<line>
+				<reportElement uuid="a8e757f4-ebec-48fb-ba18-9c019193b999" x="33" y="-19" width="1" height="32"/>
+			</line>
+			<line>
+				<reportElement uuid="a737d0bf-15c3-458c-951d-0f6476d15c5b" x="529" y="-20" width="1" height="33"/>
+			</line>
+			<textField>
+				<reportElement uuid="fc110d89-48eb-411e-80b2-e422aa77f318" x="1" y="1" width="32" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="86de7ede-6bd0-4c15-b4da-ef9c7b084abd" x="419" y="-20" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement uuid="78a9c9eb-c282-4937-9519-ee3f96ec0e85" x="1" y="13" width="529" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="0abc52c4-42cc-46dd-81d4-f80c334b9303" x="36" y="1" width="155" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NAMA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="92c106c5-0069-430e-b95b-2dd6bd8f0d6d" x="423" y="1" width="104" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTPIUTANG}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="5bb4051e-0768-4363-b8fb-6660c9ba0413" x="193" y="-19" width="1" height="33"/>
+			</line>
+			<textField>
+				<reportElement uuid="ddc941b8-89d0-4c7f-a07e-0073273adf24" x="196" y="1" width="222" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ALAMAT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e700ae0e-0a09-42b9-8780-feaee3099a9e" x="183" y="0" width="80" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="49119de4-768e-4fa4-a824-3ce7f888e289" x="263" y="0" width="40" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fee3da08-42b3-4d73-b83e-f6e30002e0f0" x="0" y="0" width="132" height="12"/>
+				<textElement>
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Powered By JavarieSoft]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="17" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="8df4dfe9-ae40-41f4-b2f7-5065161f0390" x="390" y="0" width="140" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="bb519f72-b6c8-44cc-a745-bb327c11a6e7" x="0" y="0" width="420" height="16"/>
+			</rectangle>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="d7996662-abd0-4563-9c3f-0879fa74bce0" x="423" y="1" width="104" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{VtotalSisa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="86047005-199e-4efd-989b-edbb24c62204" x="195" y="1" width="75" height="16"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

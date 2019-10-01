@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ekuitas" language="groovy" pageWidth="600" pageHeight="842" columnWidth="535" leftMargin="45" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5903711f-81f1-4b49-bb55-326fd7b883c6">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="bulan" class="java.lang.String">
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tahun" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2012"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Pperiode" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[(SELECT
+     1 as ID,
+     'Saldo Modal Awal' AS EKUITAS,
+     SP."SALDO" AS SALDOPERIODE_SALDO,
+     'PERUBAHAN POSISI MODAL DISETOR' as saldomodal,
+     'KEL1' as Kelompok
+FROM
+     "PUBLIC"."SALDOPERIODE" SP
+WHERE
+     SP.PERIODE = CONCAT(CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun}),'.',CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1))
+ AND SP.KODEAKUN = '31101')
+union
+(select 2 as ID, 'Tambahan Modal Disetor',getKredit('31104',$P{bulan},$P{tahun})-getDebet('31104',$P{bulan},$P{tahun}),'PERUBAHAN POSISI MODAL DISETOR','KEL1')
+union
+(select 3 as ID, 'Laba Di Tahan',getSaldoAwal('31102',(CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1)),(CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun}))) + getSaldoAwal('31103',(CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1)),(CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun})))  - getSaldoAwal('31105',(CASEWHEN($P{bulan} - 1=0,12,$P{bulan}-1)),(CASEWHEN($P{bulan} - 1=0,$P{tahun}-1,$P{tahun}))),'PERUBAHAN POSISI LABA DITAHAN','KEL2')
+union
+(select 4 as ID, 'PPh Pasal 29',getKredit('70001',$P{bulan},$P{tahun})-getDebet('70001',$P{bulan},$P{tahun}),'PERUBAHAN POSISI LABA DITAHAN','KEL2')
+union
+(select 5 as ID, 'Dividen Badan',getKredit('31105',$P{bulan},$P{tahun})-getDebet('31105',$P{bulan},$P{tahun}),'PERUBAHAN POSISI LABA DITAHAN','KEL2')
+union
+(select 6 as ID, 'Laba Rugi Periode Berjalan',getLaba($P{bulan},$P{tahun}),'LABA PERIODE BERJALAN','KEL2')
+ order by 1]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="EKUITAS" class="java.lang.String"/>
+	<field name="SALDOPERIODE_SALDO" class="java.lang.Double"/>
+	<field name="SALDOMODAL" class="java.lang.String"/>
+	<field name="KELOMPOK" class="java.lang.String"/>
+	<variable name="SALDOPERIODE_SALDO_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{SALDOPERIODE_SALDO}]]></variableExpression>
+	</variable>
+	<variable name="SALDOPERIODE_SALDO_2" class="java.lang.Double" resetType="Group" resetGroup="kel1" calculation="Sum">
+		<variableExpression><![CDATA[$F{SALDOPERIODE_SALDO}]]></variableExpression>
+	</variable>
+	<group name="kel">
+		<groupExpression><![CDATA[$F{KELOMPOK}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="kel1">
+		<groupExpression><![CDATA[$F{SALDOMODAL}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<textField>
+					<reportElement uuid="d3e129b7-7cd3-4cd6-9d1c-86e998fe636a" x="10" y="0" width="275" height="16"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SALDOMODAL}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="16">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="4c64c7a2-658a-4b09-9c8b-121241372d31" x="396" y="0" width="133" height="16" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[($F{ID}==6)?'':$V{SALDOPERIODE_SALDO_2}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="79f135c6-f966-4475-a0c0-6b449da33b50" x="396" y="0" width="139" height="1">
+						<printWhenExpression><![CDATA[$F{ID} != 6]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="18fd0036-1030-4a8e-8edc-7c158b418993" x="1" y="18" width="258" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Perubahan Ekuitas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4b0b9339-b416-48c6-bec5-1ef19da7630f" x="1" y="1" width="244" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CV.MIRANTI ADILHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="25fd00ed-ef22-4da6-adc4-b93ca88ac861" x="1" y="35" width="36" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bulan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1c6c7e06-b588-488e-a4ee-821713ca3667" x="36" y="35" width="10" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="43011ef0-c8ae-4aa6-b95e-dd9f4639a0da" x="46" y="35" width="182" height="18"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Pperiode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement uuid="ae0bb25a-93b3-44a8-85f6-054d01049e23" x="0" y="0" width="535" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c0198752-f7cc-44c1-81ee-9dbcbb451c05" x="23" y="0" width="154" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EKUITAS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="07e2873f-192f-4acf-97d2-753059626856" x="396" y="0" width="133" height="16"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{SALDOPERIODE_SALDO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="17" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement uuid="262e5581-532e-4af9-bcf8-142644add6e8" x="396" y="0" width="133" height="16"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{SALDOPERIODE_SALDO_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="e3ae079c-a9ff-4cc4-b387-aa204342a7e3" x="0" y="0" width="535" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="2e3a2ec5-d632-4512-a97a-d893a06ab1b9" x="10" y="1" width="178" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EKUITAS AKHIR]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

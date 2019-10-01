@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     RINCIPENJUALAN."IDPENJUALAN" AS ID,
+     RINCIPENJUALAN."KODEBARANG" AS KODEBARANG,
+     PENJUALAN."TANGGAL" AS TANGGAL,
+     0 AS IN,
+     RINCIPENJUALAN."JUMLAH" AS OUT,
+     'J' AS KODETRANS
+FROM
+     "PUBLIC"."PENJUALAN" PENJUALAN INNER JOIN "PUBLIC"."RINCIPENJUALAN" RINCIPENJUALAN ON PENJUALAN."ID" = RINCIPENJUALAN."IDPENJUALAN"
+     INNER JOIN "PUBLIC"."BARANG" BARANG ON RINCIPENJUALAN."KODEBARANG" = BARANG."KODEBARANG"
+UNION ALL
+SELECT
+     RETURRINCI."IDRETUR" AS ID,
+     RETURRINCI."KODEBARANG" AS KODEBARANG,
+     RETUR."TANGGAL" AS TANGGAL,
+     RETURRINCI."JUMLAH" AS IN,
+     0 AS OUT,
+     'R' AS KODETRANS
+FROM
+     "PUBLIC"."RETUR" RETUR INNER JOIN "PUBLIC"."RETURRINCI" RETURRINCI ON RETUR."ID" = RETURRINCI."IDRETUR"
+     INNER JOIN "PUBLIC"."BARANG" BARANG ON RETURRINCI."KODEBARANG" = BARANG."KODEBARANG"]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="KODEBARANG" class="java.lang.String"/>
+	<field name="TANGGAL" class="java.sql.Date"/>
+	<field name="IN" class="java.lang.Integer"/>
+	<field name="OUT" class="java.lang.Integer"/>
+	<field name="KODETRANS" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

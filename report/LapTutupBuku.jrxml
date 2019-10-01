@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LapTutupBuku" pageWidth="600" pageHeight="842" columnWidth="535" leftMargin="45" rightMargin="20" topMargin="20" bottomMargin="20" uuid="11ff1434-76ee-4d35-ad0c-9bcc262fd8a1">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="9"/>
+	<parameter name="Pperiode" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Pbulan" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Ptahun" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[Select s.PERIODE,s.KODEAKUN,p.NAMAPERKIRAAN,
+IFNULL((select sal.SALDO from SALDOPERIODE sal where s.KODEAKUN=sal.KODEAKUN and sal.KODEAKUN=p.KODEPERKIRAAN and s.periode=sal.periode and sal.GRUP='1' ),0) AS DEBET,
+IFNULL((select sal.SALDO from SALDOPERIODE sal where s.KODEAKUN=sal.KODEAKUN and sal.KODEAKUN=p.KODEPERKIRAAN and s.periode=sal.periode AND (sal.GRUP='2'  OR sal.GRUP='3' )),0) AS KREDIT,
+IFNULL((select sal.SALDO from SALDOPERIODE sal where s.KODEAKUN=sal.KODEAKUN and sal.KODEAKUN=p.KODEPERKIRAAN and s.periode=sal.periode and sal.GRUP='1' AND (sal.KODEAKUN like '%12401.%' OR sal.KODEAKUN like '%12201.%'  OR sal.KODEAKUN like '%12301.%') ) ,0) AS AKUM,
+IFNULL((select sal.SALDO from SALDOPERIODE sal where s.KODEAKUN=sal.KODEAKUN and sal.KODEAKUN=p.KODEPERKIRAAN and s.periode=sal.periode and sal.GRUP='1' AND (sal.KODEAKUN like '%12400.%' OR sal.KODEAKUN like '%12200.%'  OR sal.KODEAKUN like '%12300.%' OR sal.KODEAKUN like '%12100.%') ) ,0) AS AKTTETAP
+from SALDOPERIODE s,PERKIRAAN p
+where s.KODEAKUN=p.KODEPERKIRAAN and (p.GRUP='1' OR p.GRUP='2' OR p.GRUP='3')
+AND s.PERIODE=$P{Pperiode} order by p.KODEPERKIRAAN]]>
+	</queryString>
+	<field name="PERIODE" class="java.lang.String"/>
+	<field name="KODEAKUN" class="java.lang.String"/>
+	<field name="NAMAPERKIRAAN" class="java.lang.String"/>
+	<field name="DEBET" class="java.lang.Double"/>
+	<field name="KREDIT" class="java.lang.Double"/>
+	<field name="AKUM" class="java.lang.Double"/>
+	<field name="AKTTETAP" class="java.lang.Double"/>
+	<variable name="TotKredit" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{KREDIT}]]></variableExpression>
+	</variable>
+	<variable name="TotDebet" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{DEBET}]]></variableExpression>
+	</variable>
+	<variable name="TotAkum" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{AKUM}]]></variableExpression>
+	</variable>
+	<variable name="TotalDebet" class="java.lang.Double">
+		<variableExpression><![CDATA[($V{TotDebet}-$V{TotAkum})-$V{TotAkum}]]></variableExpression>
+	</variable>
+	<variable name="TotalKredit" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{TotKredit}]]></variableExpression>
+	</variable>
+	<variable name="Selisih" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{TotalDebet}-$V{TotalKredit}]]></variableExpression>
+	</variable>
+	<variable name="TotAKTtetap" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{AKTTETAP}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="17964fe3-c5aa-4aa8-8aa1-2715d572ef9a" x="3" y="18" width="230" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Tutup Buku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9aba0619-26b8-4268-9e05-8606c87a7a57" x="4" y="0" width="243" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CV.MIRANTI ADILHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="abf1c08f-3ebb-4fa2-a2af-0eb7b94fbad1" x="3" y="38" width="46" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periode]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4b9c3598-25d5-4054-b428-674a175644b3" x="53" y="38" width="63" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Pbulan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1c9e0e25-799f-416b-9895-0f55c119e2bb" x="130" y="38" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Ptahun}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="62cd7719-3703-4a3d-8150-55985276a23f" x="119" y="38" width="11" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0ebd4c2a-7d91-43f0-b1ac-0200ff1d99e9" x="48" y="38" width="5" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="3" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ee9e03e8-ec2b-4f69-89e2-c671ab2ce487" x="30" y="7" width="66" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[KODEAKUN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ba99d974-7053-4aa9-ba9d-b45c6eb309ba" x="100" y="7" width="217" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[NAMAPERKIRAAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d0fff51-e5d2-4945-a0fa-3a5b9d89af50" x="432" y="7" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[KREDIT]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="c7762a8b-72ac-46cd-b577-8f8e61616799" x="0" y="6" width="535" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c576449c-5c9f-4ffe-a260-c3d388120aaf" x="0" y="7" width="27" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1a6c6b92-55fe-4e58-92ac-c903ef91846f" x="0" y="22" width="535" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="8b3bfe6f-b164-4e7f-b202-805521b517cc" x="323" y="7" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[DEBET]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b009fcab-531a-4d7e-a839-8dcd28f8468c" x="30" y="0" width="66" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KODEAKUN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5ac91cc3-b00d-4c18-9a3e-00b804a3ea9f" x="100" y="0" width="217" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NAMAPERKIRAAN}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="f4ed7f89-18aa-47bc-bbb7-758ce97057ca" x="0" y="16" width="535" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="e6183cf0-b1f7-49bb-8252-5d5fd3c2a275" x="0" y="0" width="27" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="3f4a9478-6334-4613-8890-c29d567641de" x="320" y="-17" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement uuid="d2ea3dd2-4285-4acf-b1df-2ea0fc845f27" x="97" y="-17" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement uuid="945f753e-f419-48b2-bc24-52f196247839" x="427" y="-17" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement uuid="afb7ce08-5f30-4acf-b181-21ca3a7e5b4f" x="27" y="-17" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement uuid="3ac35182-e563-492a-8e8b-e28f27cf5159" x="535" y="-17" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement uuid="98ad6b85-7a77-420f-8a7c-9d5554d97b85" x="0" y="-17" width="1" height="33"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="926fd18a-819a-4f6b-bfc2-7df7a87a0233" x="323" y="0" width="100" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEBET}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="560fa90d-9cc1-4dea-8f24-d63f25923146" x="432" y="1" width="100" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{KREDIT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f2544e8d-51dd-4d83-bd50-709999cfe266" x="173" y="0" width="80" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="03c9955d-6c0d-43f3-958d-8c1e60a0960e" x="253" y="0" width="40" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="86155147-f72d-4df7-b477-f0fcd333446d" x="411" y="0" width="144" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="45" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="565c1c02-4ee5-435e-bf69-89a9279804ac" x="320" y="0" width="108" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c223ac6a-3c8f-4615-be19-96774a5f38be" x="428" y="0" width="107" height="16"/>
+			</rectangle>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="64c6ce0a-5b29-4ab7-9c5d-f0e255a59c01" x="323" y="0" width="100" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalDebet}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="ec02e1d8-52b9-4c75-90c9-bc3dafbc8799" x="432" y="0" width="100" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalKredit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="948765cc-e7ed-491f-8f40-7704f06785c6" x="432" y="22" width="100" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Selisih}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1cec021d-0dc2-471d-a7c7-e1ce2b9addac" x="323" y="22" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SELISIH :]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="70e197a6-4d55-44fb-a756-75056333daac" x="320" y="38" width="215" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

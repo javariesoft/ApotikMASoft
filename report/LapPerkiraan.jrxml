@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="600" pageHeight="842" columnWidth="535" leftMargin="45" rightMargin="20" topMargin="20" bottomMargin="20" uuid="59197804-8c1c-4bc9-85cf-863f5bb2d3d7">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Pgrup" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     PERKIRAAN."KODEPERKIRAAN" AS PERKIRAAN_KODEPERKIRAAN,
+     PERKIRAAN."NAMAPERKIRAAN" AS PERKIRAAN_NAMAPERKIRAAN,
+     PERKIRAAN."GRUP" AS PERKIRAAN_GRUP,
+     PERKIRAAN."TIPE" AS PERKIRAAN_TIPE,
+     CASE PERKIRAAN."GRUP" WHEN 1 THEN 'HARTA' WHEN 2 THEN 'HUTANG' WHEN 3 THEN 'MODAL' WHEN 4 THEN 'PENDAPATAN' WHEN 5 THEN 'HPP' WHEN 6 THEN 'BIAYA' WHEN 7 THEN 'Lain-Lain' END as KEL
+FROM
+     "PUBLIC"."PERKIRAAN" PERKIRAAN
+WHERE PERKIRAAN."GRUP" like $P{Pgrup}
+order by PERKIRAAN."KODEPERKIRAAN"]]>
+	</queryString>
+	<field name="PERKIRAAN_KODEPERKIRAAN" class="java.lang.String"/>
+	<field name="PERKIRAAN_NAMAPERKIRAAN" class="java.lang.String"/>
+	<field name="PERKIRAAN_GRUP" class="java.lang.Integer"/>
+	<field name="PERKIRAAN_TIPE" class="java.lang.String"/>
+	<field name="KEL" class="java.lang.String"/>
+	<group name="Kelompok">
+		<groupExpression><![CDATA[$F{PERKIRAAN_GRUP}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement uuid="9714353e-a88b-40c8-9225-859a548cd5cb" x="43" y="2" width="24" height="20"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PERKIRAAN_GRUP}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="63dd2944-3129-424d-99bd-fa272b09506a" x="68" y="2" width="165" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{KEL}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="c8da17cb-0597-4b86-a65b-5ab88a7187cb" x="11" y="2" width="37" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Group]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="1">
+				<line>
+					<reportElement uuid="fa2e9f6c-2553-44a1-a544-9bac8e4a5e3e" x="0" y="0" width="535" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="11e44f81-fd1f-4e3a-8dab-f92fd1265e9c" x="6" y="2" width="243" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CV.MIRANTI ADILHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e7d5329-1c00-45cb-beef-f4e5540e01c1" x="6" y="22" width="230" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA PERKIRAAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement uuid="04a80f70-1b56-4fe7-8195-8b38decf5844" x="0" y="6" width="535" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="476f0a57-d70e-4a01-af77-39a6efa18e72" x="0" y="28" width="535" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="b83788c8-b34a-41d0-a400-56b5cd642839" x="3" y="7" width="33" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3be58c7d-f4a3-4a57-98e1-20e5dcdc6c0a" x="43" y="7" width="124" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[KODE PERKIRAAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="abd05a56-6ede-442c-ae5e-802230264f06" x="171" y="7" width="287" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NAMA PERKIRAAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8da99ba4-42c9-4a9e-8914-4dbbc4c70a23" x="461" y="7" width="72" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[TIPE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9eef01eb-22d7-498d-bbb5-1fca57191415" x="43" y="0" width="124" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PERKIRAAN_KODEPERKIRAAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0ae7c558-76e4-44f4-a411-59a7b6f22ba3" x="171" y="0" width="287" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PERKIRAAN_NAMAPERKIRAAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ef72e5d8-733a-47b2-b069-6d1f6284abe6" x="461" y="0" width="72" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PERKIRAAN_TIPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7697cf0b-2e15-4da2-9d4a-5950f536e1ae" x="3" y="0" width="33" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement uuid="51217433-d714-49a6-9547-dbb6eccd8326" x="182" y="0" width="80" height="16"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="e9ddd9b5-7c5c-40f1-b786-a54c820e8e02" x="262" y="0" width="40" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
