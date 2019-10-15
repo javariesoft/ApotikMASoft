@@ -28,6 +28,8 @@ import com.eigher.db.loghistoryDao;
 import com.eigher.model.loghistory;
 import java.text.ParseException;
 import javax.swing.table.TableColumn;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -46,6 +48,8 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
     loghistoryDao lhdao;
     com.erv.function.Util u = new com.erv.function.Util();
     String aksilog = "";
+    MaskFormatter mf1;
+    DefaultFormatterFactory formatterFactory;
 
     /**
      * Creates new form FormPelanggan
@@ -67,7 +71,12 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             reloadData(cboAktif.getSelectedIndex());
             cboKriteria.setSelectedIndex(1);
             cektombol();
-
+            mf1 = createFormatter("##.###.###.#-###.###");
+            mf1.setPlaceholderCharacter('_');
+            mf1.setValidCharacters("0123456789");
+            mf1.setValueClass(String.class);
+            formatterFactory = new DefaultFormatterFactory(mf1);
+            txtNPWP.setFormatterFactory(formatterFactory);
         } catch (SQLException ex) {
         }
     }
@@ -108,7 +117,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         btnCancel = new javax.swing.JButton();
         lblKodeAkun = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtNPWP = new javax.swing.JTextField();
+        txtNIK = new javax.swing.JTextField();
         CheckCabang = new javax.swing.JCheckBox();
         btnKeluar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -117,24 +126,28 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         cboStatus = new javax.swing.JComboBox();
         cboKriteria = new javax.swing.JComboBox();
+        txtNPWP = new javax.swing.JFormattedTextField();
+        cbNik = new javax.swing.JCheckBox();
+        jLabel18 = new javax.swing.JLabel();
+        cboJenisPajak = new javax.swing.JComboBox<>();
 
         setClosable(true);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(javariesoft.JavarieSoftApp.class).getContext().getResourceMap(FormPelanggan.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(FormPelanggan.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
             }
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosing(evt);
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -229,7 +242,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtAlamat);
 
         panelCool1.add(jScrollPane1);
-        jScrollPane1.setBounds(200, 150, 450, 50);
+        jScrollPane1.setBounds(200, 150, 370, 50);
 
         jLabel6.setFont(resourceMap.getFont("jLabel6.font")); // NOI18N
         jLabel6.setForeground(resourceMap.getColor("jLabel6.foreground")); // NOI18N
@@ -369,11 +382,11 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         panelCool1.add(jLabel9);
         jLabel9.setBounds(30, 160, 120, 16);
 
-        txtNPWP.setFont(resourceMap.getFont("txtNPWP.font")); // NOI18N
-        txtNPWP.setText(resourceMap.getString("txtNPWP.text")); // NOI18N
-        txtNPWP.setName("txtNPWP"); // NOI18N
-        panelCool1.add(txtNPWP);
-        txtNPWP.setBounds(200, 205, 330, 21);
+        txtNIK.setFont(resourceMap.getFont("txtNIK.font")); // NOI18N
+        txtNIK.setText(resourceMap.getString("txtNIK.text")); // NOI18N
+        txtNIK.setName("txtNIK"); // NOI18N
+        panelCool1.add(txtNIK);
+        txtNIK.setBounds(420, 200, 230, 21);
 
         CheckCabang.setFont(resourceMap.getFont("CheckCabang.font")); // NOI18N
         CheckCabang.setText(resourceMap.getString("CheckCabang.text")); // NOI18N
@@ -431,6 +444,36 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         panelCool1.add(cboKriteria);
         cboKriteria.setBounds(190, 340, 90, 22);
 
+        txtNPWP.setText(resourceMap.getString("txtNPWP.text")); // NOI18N
+        txtNPWP.setFont(resourceMap.getFont("txtNPWP.font")); // NOI18N
+        txtNPWP.setName("txtNPWP"); // NOI18N
+        panelCool1.add(txtNPWP);
+        txtNPWP.setBounds(200, 200, 210, 21);
+
+        cbNik.setFont(resourceMap.getFont("cbNik.font")); // NOI18N
+        cbNik.setText(resourceMap.getString("cbNik.text")); // NOI18N
+        cbNik.setName("cbNik"); // NOI18N
+        cbNik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNikActionPerformed(evt);
+            }
+        });
+        panelCool1.add(cbNik);
+        cbNik.setBounds(580, 170, 70, 23);
+
+        jLabel18.setFont(resourceMap.getFont("jLabel18.font")); // NOI18N
+        jLabel18.setForeground(resourceMap.getColor("jLabel18.foreground")); // NOI18N
+        jLabel18.setText(resourceMap.getString("jLabel18.text")); // NOI18N
+        jLabel18.setName("jLabel18"); // NOI18N
+        panelCool1.add(jLabel18);
+        jLabel18.setBounds(340, 260, 90, 15);
+
+        cboJenisPajak.setFont(resourceMap.getFont("cboJenisPajak.font")); // NOI18N
+        cboJenisPajak.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "010-Bukan Pemungut PPN", "020-Pemungut Bendaharawan" }));
+        cboJenisPajak.setName("cboJenisPajak"); // NOI18N
+        panelCool1.add(cboJenisPajak);
+        cboJenisPajak.setBounds(440, 260, 210, 21);
+
         getContentPane().add(panelCool1, java.awt.BorderLayout.CENTER);
 
         setBounds(0, 0, 700, 665);
@@ -442,7 +485,7 @@ private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         c.createStatement().execute("set autocommit false");
         int x = JOptionPane.showConfirmDialog(this, "Apakah Data Akan Disimpan?", "", JOptionPane.YES_NO_OPTION);
         if (x == 0) {
-            if ((txtNamaPelanggan.getText().equals("")) || (txtkodePelanggan.getText().equals("")) || (txtbatasKredit.getText().equals("")) || (txtNohp.getText().equals("")) || (txtAlamat.getText().equals("")) || (txtNPWP.getText().equals(""))) {
+            if ((txtNamaPelanggan.getText().equals("")) || (txtkodePelanggan.getText().equals("")) || (txtbatasKredit.getText().equals("")) || (txtNohp.getText().equals("")) || (txtAlamat.getText().equals("")) || (txtNIK.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, "Data Belum Lengkap.. !");
                 txtNamaPelanggan.requestFocus();
             } else {
@@ -494,7 +537,19 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         dateTglReg.setSelectedDate(c1);
         txtbatasKredit.setValue(p.getBATASKREDIT());
         lblKodeAkun.setText(p.getKODEAKUN());
-        txtNPWP.setText(p.getNPWP());
+        if (p.isNIK()) {
+            txtNPWP.setValue("00.000.000.0-000.000");
+            p.setNPWPNoFormat(p.getNPWP());
+            txtNIK.setText(p.getNPWP());
+        } else {
+            if (p.getNPWP().equals("-")) {
+                txtNPWP.setValue("00.000.000.0-000.000");
+            } else {
+                txtNPWP.setValue(getFormatNPWP(p.getNPWPNoFormat()));
+            }
+            txtNIK.setText("");
+        }
+        cbNik.setSelected(p.isNIK());
         namaPemilik.setText(p.getNAMAPEMILIK());
         cboStatus.setSelectedIndex(p.getSTATUSAKTIF());
 //        if(p.getSTATUSCABANG().equals("1")){
@@ -516,7 +571,7 @@ private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         c.createStatement().execute("set autocommit false");
         int x = JOptionPane.showConfirmDialog(this, "Apakah Data Akan Diedit?", "", JOptionPane.YES_NO_OPTION);
         if (x == 0) {
-            if ((txtNamaPelanggan.getText().equals("")) || (txtkodePelanggan.getText().equals("")) || (txtbatasKredit.getText().equals("")) || (txtNohp.getText().equals("")) || (txtAlamat.getText().equals("")) || (txtNPWP.getText().equals(""))) {
+            if ((txtNamaPelanggan.getText().equals("")) || (txtkodePelanggan.getText().equals("")) || (txtbatasKredit.getText().equals("")) || (txtNohp.getText().equals("")) || (txtAlamat.getText().equals("")) || (txtNIK.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, "Data Belum Lengkap.. !");
                 txtNamaPelanggan.requestFocus();
             } else {
@@ -654,6 +709,19 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
+    private void cbNikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNikActionPerformed
+        // TODO add your handling code here:
+        if (cbNik.isSelected()) {
+            txtNPWP.setValue("00.000.000.0-000.000");
+            txtNIK.setEditable(true);
+            txtNIK.requestFocus();
+        }else{
+            txtNIK.setEditable(false);
+            txtNPWP.requestFocus();
+            txtNPWP.selectAll();
+        }
+    }//GEN-LAST:event_cbNikActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CheckCabang;
     private javax.swing.JButton btnCancel;
@@ -662,12 +730,15 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnKeluar;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JCheckBox cbNik;
     private javax.swing.JComboBox cboAktif;
+    private javax.swing.JComboBox<String> cboJenisPajak;
     private javax.swing.JComboBox cboKriteria;
     private javax.swing.JComboBox cboStatus;
     private datechooser.beans.DateChooserCombo dateTglReg;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -686,7 +757,8 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
     private com.erv.function.PanelCool panelCool1;
     private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtKriteria;
-    private javax.swing.JTextField txtNPWP;
+    private javax.swing.JTextField txtNIK;
+    private javax.swing.JFormattedTextField txtNPWP;
     private javax.swing.JTextField txtNamaPelanggan;
     private javax.swing.JTextField txtNohp;
     private javax.swing.JFormattedTextField txtbatasKredit;
@@ -700,7 +772,7 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         txtNohp.setText("");
         txtbatasKredit.setValue(new Integer(0));
         lblKodeAkun.setText("");
-        txtNPWP.setText("");
+        txtNIK.setText("");
         namaPemilik.setText("");
         CheckCabang.setVisible(false);
     }
@@ -754,15 +826,24 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         p.setTGLREG(dateTglReg.getText());
         p.setBATASKREDIT(Float.parseFloat(txtbatasKredit.getValue().toString()));
         p.setKODEAKUN(lblKodeAkun.getText());
-        p.setNPWP(txtNPWP.getText());
+        if (cbNik.isSelected()) {
+            p.setNPWP(txtNIK.getText());
+        } else {
+            p.setNPWP(txtNPWP.getValue().toString());
+        }
+        p.setNIK(cbNik.isSelected());
 //        if (CheckCabang.isSelected()) {
 //            p.setSTATUSCABANG("1");
 //        }else{
         p.setSTATUSCABANG("0");
         p.setNAMAPEMILIK(namaPemilik.getText());
         p.setSTATUSAKTIF(cboStatus.getSelectedIndex());
+        String tempJenisPajak[] = cboJenisPajak.getSelectedItem().toString().split("-");
+        p.setJENISPAJAK(tempJenisPajak[0]); 
+        
 //        }
 //        try {
+
         boolean stat;
         if (pil == 0) {
             stat = dbpelanggan.insert(p);
@@ -856,5 +937,47 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         } else if (JavarieSoftApp.groupuser.equals("Master Data")) {
             settingtombol(true, false, false);
         }
+    }
+    
+    MaskFormatter createFormatter(String s) {
+        MaskFormatter formatter = null;
+        try {
+            formatter = new MaskFormatter(s);
+        } catch (java.text.ParseException exc) {
+            System.err.println("formatter is bad: " + exc.getMessage());
+            System.exit(-1);
+        }
+        return formatter;
+    }
+    
+    String getFormatNPWP(String npwp) {
+        //12.212.122.2-233.3333
+        String hasil = "";
+        if (npwp.contains(".")) {
+            return npwp;
+        } else {
+            for (int i = 0; i < npwp.length(); i++) {
+
+                if (i == 2 || i == 5 || i == 8 || i == 12) {
+                    hasil += ".";
+                }
+                if (i == 9) {
+                    hasil += "-";
+                }
+                hasil += npwp.charAt(i);
+            }
+        }
+        return hasil;
+    }
+    
+    
+    private int getIndexCboJenisPajak(String jenispajak) {
+        for (int i = 0; i < cboJenisPajak.getItemCount(); i++) {
+            String data[] = cboJenisPajak.getItemAt(i).split("-");
+            if (jenispajak.equals(data[0])) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

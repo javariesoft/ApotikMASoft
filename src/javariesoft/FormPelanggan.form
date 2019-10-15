@@ -163,7 +163,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="200" y="150" width="450" height="50"/>
+              <AbsoluteConstraints x="200" y="150" width="370" height="50"/>
             </Constraint>
           </Constraints>
 
@@ -402,15 +402,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNPWP">
+        <Component class="javax.swing.JTextField" name="txtNIK">
           <Properties>
-            <Property name="font" type="java.awt.Font" resourceKey="txtNPWP.font"/>
-            <Property name="text" type="java.lang.String" resourceKey="txtNPWP.text"/>
-            <Property name="name" type="java.lang.String" value="txtNPWP" noResource="true"/>
+            <Property name="font" type="java.awt.Font" resourceKey="txtNIK.font"/>
+            <Property name="text" type="java.lang.String" resourceKey="txtNIK.text"/>
+            <Property name="name" type="java.lang.String" value="txtNIK" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="200" y="205" width="330" height="-1"/>
+              <AbsoluteConstraints x="420" y="200" width="230" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -528,6 +528,66 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="190" y="340" width="90" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="txtNPWP">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="txtNPWP.text"/>
+            <Property name="font" type="java.awt.Font" resourceKey="txtNPWP.font"/>
+            <Property name="name" type="java.lang.String" value="txtNPWP" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="200" y="200" width="210" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cbNik">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="cbNik.font"/>
+            <Property name="text" type="java.lang.String" resourceKey="cbNik.text"/>
+            <Property name="name" type="java.lang.String" value="cbNik" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbNikActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="580" y="170" width="70" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel18">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="jLabel18.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="jLabel18.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="jLabel18.text"/>
+            <Property name="name" type="java.lang.String" value="jLabel18" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="340" y="260" width="90" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cboJenisPajak">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="cboJenisPajak.font"/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="2">
+                <StringItem index="0" value="010-Bukan Pemungut PPN"/>
+                <StringItem index="1" value="020-Pemungut Bendaharawan"/>
+              </StringArray>
+            </Property>
+            <Property name="name" type="java.lang.String" value="cboJenisPajak" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="440" y="260" width="210" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

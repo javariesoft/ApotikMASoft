@@ -83,29 +83,29 @@ public class JavarieSoftApp extends SingleFrameApplication {
             //launch(JavarieSoftApp.class, args);
 //MulaiCdCPU
             c=koneksi.getKoneksiJ();
-            Statement stat=c.createStatement();
-            String h="";
-               byte[] hasil;
-            try {
-                hasil = com.erv.function.Authentication.encryptPassword(com.erv.function.MiscUtils.getCpuID());
-            
-               for(int i=0;i<hasil.length;i++){
-                   h+=hasil[i];
-                }
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(JavarieSoftApp.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(JavarieSoftApp.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            ResultSet rs=stat.executeQuery("select * from KODEAKSES where KODE='"+h+"'");
-            if(rs.next()){
+//            Statement stat=c.createStatement();
+//            String h="";
+//               byte[] hasil;
+//            try {
+//                hasil = com.erv.function.Authentication.encryptPassword(com.erv.function.MiscUtils.getCpuID());
+//            
+//               for(int i=0;i<hasil.length;i++){
+//                   h+=hasil[i];
+//                }
+//            } catch (UnsupportedEncodingException ex) {
+//                Logger.getLogger(JavarieSoftApp.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (NoSuchAlgorithmException ex) {
+//                Logger.getLogger(JavarieSoftApp.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            ResultSet rs=stat.executeQuery("select * from KODEAKSES where KODE='"+h+"'");
+//            if(rs.next()){
                     launch(JavarieSoftApp.class, args);   
-            }else{
-                DialogRegister d=new DialogRegister(null, true);
-                    d.setVisible(true);
-            }
-            rs.close();
-            stat.close();
+//            }else{
+//                DialogRegister d=new DialogRegister(null, true);
+//                    d.setVisible(true);
+//            }
+//            rs.close();
+//            stat.close();
             c.close();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

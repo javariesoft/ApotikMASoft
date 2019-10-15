@@ -201,6 +201,7 @@ public class JavarieSoftView extends FrameView {
         Manalisa = new javax.swing.JMenu();
         Manalisastokbrg = new javax.swing.JMenuItem();
         MSearchingBarang = new javax.swing.JMenuItem();
+        MNomorPajak = new javax.swing.JMenuItem();
         Mtransaksi = new javax.swing.JMenu();
         Mjurnal = new javax.swing.JMenuItem();
         Mpenjualan = new javax.swing.JMenuItem();
@@ -216,6 +217,7 @@ public class JavarieSoftView extends FrameView {
         Mtutupstok = new javax.swing.JMenuItem();
         Mtutupbuku = new javax.swing.JMenuItem();
         MTutupHarian = new javax.swing.JMenuItem();
+        MPajak = new javax.swing.JMenuItem();
         Mlaporan = new javax.swing.JMenu();
         Mlappembelian = new javax.swing.JMenu();
         MLapPembelianPerFaktur = new javax.swing.JMenuItem();
@@ -302,7 +304,7 @@ public class JavarieSoftView extends FrameView {
             }
         });
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(javariesoft.JavarieSoftApp.class).getContext().getResourceMap(JavarieSoftView.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(JavarieSoftView.class);
         LblJenis.setFont(resourceMap.getFont("LblJenis4.font")); // NOI18N
         LblJenis.setForeground(resourceMap.getColor("LblJenis.foreground")); // NOI18N
         LblJenis.setText(resourceMap.getString("LblJenis.text")); // NOI18N
@@ -602,6 +604,15 @@ public class JavarieSoftView extends FrameView {
         });
         fileMenu.add(MSearchingBarang);
 
+        MNomorPajak.setText(resourceMap.getString("MNomorPajak.text")); // NOI18N
+        MNomorPajak.setName("MNomorPajak"); // NOI18N
+        MNomorPajak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MNomorPajakActionPerformed(evt);
+            }
+        });
+        fileMenu.add(MNomorPajak);
+
         menuBar.add(fileMenu);
 
         Mtransaksi.setIcon(resourceMap.getIcon("Mtransaksi.icon")); // NOI18N
@@ -752,6 +763,15 @@ public class JavarieSoftView extends FrameView {
             }
         });
         Mtransaksi.add(MTutupHarian);
+
+        MPajak.setText(resourceMap.getString("MPajak.text")); // NOI18N
+        MPajak.setName("MPajak"); // NOI18N
+        MPajak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MPajakActionPerformed(evt);
+            }
+        });
+        Mtransaksi.add(MPajak);
 
         menuBar.add(Mtransaksi);
 
@@ -1248,7 +1268,7 @@ public class JavarieSoftView extends FrameView {
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(javariesoft.JavarieSoftApp.class).getContext().getActionMap(JavarieSoftView.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(JavarieSoftView.class, this);
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
         aboutMenuItem.setIcon(resourceMap.getIcon("aboutMenuItem.icon")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
@@ -2054,6 +2074,22 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         p.setVisible(true);
     }//GEN-LAST:event_MLapPajakReturPenjualanActionPerformed
 
+    private void MPajakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MPajakActionPerformed
+        // TODO add your handling code here:
+        FormLapPajakExcel p = new FormLapPajakExcel();
+        p.toFront();
+        panelCool1.add(p);
+        p.setVisible(true);
+    }//GEN-LAST:event_MPajakActionPerformed
+
+    private void MNomorPajakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MNomorPajakActionPerformed
+        // TODO add your handling code here:
+        FormNomorpajak p = new FormNomorpajak();
+        p.toFront();
+        panelCool1.add(p);
+        p.setVisible(true);
+    }//GEN-LAST:event_MNomorPajakActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel LblJenis;
     private javax.swing.JLabel LblJenis1;
@@ -2084,6 +2120,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     private javax.swing.JMenuItem MLapRekapBarangPerMerk;
     private javax.swing.JMenuItem MLapRekapPengiriman;
     private javax.swing.JMenuItem MLapStokBarang;
+    private javax.swing.JMenuItem MNomorPajak;
+    private javax.swing.JMenuItem MPajak;
     private javax.swing.JMenuItem MRekapHutangSupplier;
     public static javax.swing.JMenuItem MRekapPembelianHarian;
     private javax.swing.JMenuItem MRekapPiutangPelanggan;
