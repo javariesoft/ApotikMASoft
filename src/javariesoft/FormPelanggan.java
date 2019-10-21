@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
+ /*
  * FormPelanggan.java
  *
  * Created on Nov 25, 2011, 5:11:03 AM
@@ -26,6 +26,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import com.eigher.db.loghistoryDao;
 import com.eigher.model.loghistory;
+import java.awt.Font;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.ParseException;
 import javax.swing.table.TableColumn;
 import javax.swing.text.DefaultFormatterFactory;
@@ -33,7 +36,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author erwadi
+ * @author JavarieSoftTeam
  */
 public class FormPelanggan extends javax.swing.JInternalFrame {
 
@@ -43,13 +46,13 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
     perkiraanDao dbpr;
     //java.text.DateFormat d = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
+    MaskFormatter mf1;
+    DefaultFormatterFactory formatterFactory;
     Connection c;
     loghistory lh;
     loghistoryDao lhdao;
     com.erv.function.Util u = new com.erv.function.Util();
     String aksilog = "";
-    MaskFormatter mf1;
-    DefaultFormatterFactory formatterFactory;
 
     /**
      * Creates new form FormPelanggan
@@ -58,26 +61,27 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         initComponents();
         try {
             kosongkan();
-
             dateTglReg.setDateFormat(d);
             c = koneksi.getKoneksiJ();
             c.createStatement().execute("set autocommit true");
             dbpelanggan = new pelangganDao(c);
             dbpr = new perkiraanDao();
-            p = new pelanggan();
             pr = new perkiraan();
             lh = new loghistory();
             lhdao = new loghistoryDao();
             reloadData(cboAktif.getSelectedIndex());
             cboKriteria.setSelectedIndex(1);
             cektombol();
+            isiCombo();
             mf1 = createFormatter("##.###.###.#-###.###");
             mf1.setPlaceholderCharacter('_');
             mf1.setValidCharacters("0123456789");
             mf1.setValueClass(String.class);
             formatterFactory = new DefaultFormatterFactory(mf1);
             txtNPWP.setFormatterFactory(formatterFactory);
+            txtNIK.setEditable(false); 
         } catch (SQLException ex) {
+
         }
     }
 
@@ -90,49 +94,69 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelCool1 = new com.erv.function.PanelCool();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtNamaPelanggan = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtkodePelanggan = new javax.swing.JTextField();
-        txtNamaPelanggan = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        dateTglReg = new datechooser.beans.DateChooserCombo();
         jLabel4 = new javax.swing.JLabel();
+        dateTglReg = new datechooser.beans.DateChooserCombo();
+        jLabel6 = new javax.swing.JLabel();
         txtbatasKredit = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
+        txtNohp = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        namaPemilik = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        cboStatus = new javax.swing.JComboBox();
+        CheckCabang = new javax.swing.JCheckBox();
+        lblKodeAkun = new javax.swing.JLabel();
+        txtNPWP = new javax.swing.JFormattedTextField();
+        cbNik = new javax.swing.JCheckBox();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAlamatPemilik = new javax.swing.JTextArea();
+        txtNIK = new javax.swing.JFormattedTextField();
+        jLabel18 = new javax.swing.JLabel();
+        cboJenisPajak = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAlamat = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
-        txtNohp = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        cboPropinsi = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        cboKabupaten = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        cboKecamatan = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        cboKelurahan = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        txtKodePos = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtRT = new javax.swing.JTextField();
+        txtRW = new javax.swing.JTextField();
+        txtNomor = new javax.swing.JTextField();
+        txtBlok = new javax.swing.JTextField();
+        panelCool1 = new com.erv.function.PanelCool();
         jLabel7 = new javax.swing.JLabel();
         btnInsert = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
         txtKriteria = new javax.swing.JTextField();
         btnFilter = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        lblKodeAkun = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txtNIK = new javax.swing.JTextField();
-        CheckCabang = new javax.swing.JCheckBox();
         btnKeluar = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        namaPemilik = new javax.swing.JTextField();
         cboAktif = new javax.swing.JComboBox();
-        jLabel11 = new javax.swing.JLabel();
-        cboStatus = new javax.swing.JComboBox();
         cboKriteria = new javax.swing.JComboBox();
-        txtNPWP = new javax.swing.JFormattedTextField();
-        cbNik = new javax.swing.JCheckBox();
-        jLabel18 = new javax.swing.JLabel();
-        cboJenisPajak = new javax.swing.JComboBox<>();
 
         setClosable(true);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(FormPelanggan.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(javariesoft.JavarieSoftApp.class).getContext().getResourceMap(FormPelanggan.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -152,35 +176,34 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        getContentPane().setLayout(null);
 
-        panelCool1.setName("panelCool1"); // NOI18N
-        panelCool1.setLayout(null);
+        jTabbedPane1.setBackground(resourceMap.getColor("jTabbedPane1.background")); // NOI18N
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTabbedPane1.setName("jTabbedPane1"); // NOI18N
 
-        jLabel2.setFont(resourceMap.getFont("jLabel2.font")); // NOI18N
-        jLabel2.setForeground(resourceMap.getColor("jLabel2.foreground")); // NOI18N
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
-        panelCool1.add(jLabel2);
-        jLabel2.setBounds(30, 45, 120, 16);
+        jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
+        jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setLayout(null);
 
-        txtkodePelanggan.setEditable(false);
-        txtkodePelanggan.setFont(resourceMap.getFont("txtkodePelanggan.font")); // NOI18N
-        txtkodePelanggan.setText(resourceMap.getString("txtkodePelanggan.text")); // NOI18N
-        txtkodePelanggan.setName("txtkodePelanggan"); // NOI18N
-        panelCool1.add(txtkodePelanggan);
-        txtkodePelanggan.setBounds(200, 45, 160, 21);
+        jLabel3.setFont(resourceMap.getFont("jLabel3.font")); // NOI18N
+        jLabel3.setForeground(resourceMap.getColor("jLabel3.foreground")); // NOI18N
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(10, 10, 120, 16);
 
         txtNamaPelanggan.setFont(resourceMap.getFont("txtNamaPelanggan.font")); // NOI18N
         txtNamaPelanggan.setText(resourceMap.getString("txtNamaPelanggan.text")); // NOI18N
         txtNamaPelanggan.setName("txtNamaPelanggan"); // NOI18N
-        txtNamaPelanggan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNamaPelangganActionPerformed(evt);
-            }
-        });
         txtNamaPelanggan.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNamaPelangganFocusLost(evt);
+            }
+        });
+        txtNamaPelanggan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaPelangganActionPerformed(evt);
             }
         });
         txtNamaPelanggan.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -188,26 +211,40 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
                 txtNamaPelangganKeyPressed(evt);
             }
         });
-        panelCool1.add(txtNamaPelanggan);
-        txtNamaPelanggan.setBounds(200, 20, 270, 21);
+        jPanel1.add(txtNamaPelanggan);
+        txtNamaPelanggan.setBounds(180, 10, 330, 21);
 
-        jLabel3.setFont(resourceMap.getFont("jLabel3.font")); // NOI18N
-        jLabel3.setForeground(resourceMap.getColor("jLabel3.foreground")); // NOI18N
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
-        panelCool1.add(jLabel3);
-        jLabel3.setBounds(30, 20, 120, 16);
+        jLabel2.setFont(resourceMap.getFont("jLabel2.font")); // NOI18N
+        jLabel2.setForeground(resourceMap.getColor("jLabel2.foreground")); // NOI18N
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(10, 40, 120, 16);
 
-        dateTglReg.setFieldFont(resourceMap.getFont("dateTglReg.dch_combo_fieldFont")); // NOI18N
-        panelCool1.add(dateTglReg);
-        dateTglReg.setBounds(200, 70, 155, 20);
+        txtkodePelanggan.setEditable(false);
+        txtkodePelanggan.setFont(resourceMap.getFont("txtkodePelanggan.font")); // NOI18N
+        txtkodePelanggan.setText(resourceMap.getString("txtkodePelanggan.text")); // NOI18N
+        txtkodePelanggan.setName("txtkodePelanggan"); // NOI18N
+        jPanel1.add(txtkodePelanggan);
+        txtkodePelanggan.setBounds(180, 40, 160, 21);
 
         jLabel4.setFont(resourceMap.getFont("jLabel4.font")); // NOI18N
         jLabel4.setForeground(resourceMap.getColor("jLabel4.foreground")); // NOI18N
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
-        panelCool1.add(jLabel4);
-        jLabel4.setBounds(30, 70, 120, 16);
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(10, 70, 120, 16);
+
+        dateTglReg.setFieldFont(resourceMap.getFont("dateTglReg.dch_combo_fieldFont")); // NOI18N
+        jPanel1.add(dateTglReg);
+        dateTglReg.setBounds(180, 70, 155, 20);
+
+        jLabel6.setFont(resourceMap.getFont("jLabel6.font")); // NOI18N
+        jLabel6.setForeground(resourceMap.getColor("jLabel6.foreground")); // NOI18N
+        jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
+        jLabel6.setName("jLabel6"); // NOI18N
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(10, 100, 120, 16);
 
         txtbatasKredit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
         txtbatasKredit.setText(resourceMap.getString("txtbatasKredit.text")); // NOI18N
@@ -218,15 +255,138 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
                 txtbatasKreditKeyPressed(evt);
             }
         });
-        panelCool1.add(txtbatasKredit);
-        txtbatasKredit.setBounds(200, 95, 160, 21);
+        jPanel1.add(txtbatasKredit);
+        txtbatasKredit.setBounds(180, 100, 210, 21);
 
         jLabel5.setFont(resourceMap.getFont("jLabel5.font")); // NOI18N
         jLabel5.setForeground(resourceMap.getColor("jLabel5.foreground")); // NOI18N
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
         jLabel5.setName("jLabel5"); // NOI18N
-        panelCool1.add(jLabel5);
-        jLabel5.setBounds(30, 120, 120, 16);
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(10, 130, 120, 16);
+
+        txtNohp.setFont(resourceMap.getFont("txtNohp.font")); // NOI18N
+        txtNohp.setText(resourceMap.getString("txtNohp.text")); // NOI18N
+        txtNohp.setName("txtNohp"); // NOI18N
+        txtNohp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNohpKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtNohp);
+        txtNohp.setBounds(180, 130, 210, 21);
+
+        jLabel10.setFont(resourceMap.getFont("jLabel10.font")); // NOI18N
+        jLabel10.setForeground(resourceMap.getColor("jLabel10.foreground")); // NOI18N
+        jLabel10.setText(resourceMap.getString("jLabel10.text")); // NOI18N
+        jLabel10.setName("jLabel10"); // NOI18N
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(10, 160, 120, 16);
+
+        jLabel11.setFont(resourceMap.getFont("jLabel11.font")); // NOI18N
+        jLabel11.setForeground(resourceMap.getColor("jLabel11.foreground")); // NOI18N
+        jLabel11.setText(resourceMap.getString("jLabel11.text")); // NOI18N
+        jLabel11.setName("jLabel11"); // NOI18N
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(10, 190, 120, 16);
+
+        namaPemilik.setFont(resourceMap.getFont("namaPemilik.font")); // NOI18N
+        namaPemilik.setText(resourceMap.getString("namaPemilik.text")); // NOI18N
+        namaPemilik.setName("namaPemilik"); // NOI18N
+        jPanel1.add(namaPemilik);
+        namaPemilik.setBounds(180, 190, 460, 21);
+
+        jLabel8.setFont(resourceMap.getFont("jLabel8.font")); // NOI18N
+        jLabel8.setForeground(resourceMap.getColor("jLabel8.foreground")); // NOI18N
+        jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
+        jLabel8.setName("jLabel8"); // NOI18N
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(400, 50, 120, 16);
+
+        cboStatus.setFont(resourceMap.getFont("cboStatus.font")); // NOI18N
+        cboStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aktif", "Tidak Aktif", "New Record" }));
+        cboStatus.setName("cboStatus"); // NOI18N
+        jPanel1.add(cboStatus);
+        cboStatus.setBounds(530, 50, 210, 22);
+
+        CheckCabang.setFont(resourceMap.getFont("CheckCabang.font")); // NOI18N
+        CheckCabang.setText(resourceMap.getString("CheckCabang.text")); // NOI18N
+        CheckCabang.setName("CheckCabang"); // NOI18N
+        jPanel1.add(CheckCabang);
+        CheckCabang.setBounds(730, 10, 100, 23);
+
+        lblKodeAkun.setFont(resourceMap.getFont("lblKodeAkun.font")); // NOI18N
+        lblKodeAkun.setForeground(resourceMap.getColor("lblKodeAkun.foreground")); // NOI18N
+        lblKodeAkun.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblKodeAkun.setName("lblKodeAkun"); // NOI18N
+        jPanel1.add(lblKodeAkun);
+        lblKodeAkun.setBounds(670, 240, 160, 20);
+
+        txtNPWP.setText(resourceMap.getString("txtNPWP.text")); // NOI18N
+        txtNPWP.setFont(resourceMap.getFont("txtNPWP.font")); // NOI18N
+        txtNPWP.setName("txtNPWP"); // NOI18N
+        jPanel1.add(txtNPWP);
+        txtNPWP.setBounds(180, 160, 210, 21);
+
+        cbNik.setFont(resourceMap.getFont("cbNik.font")); // NOI18N
+        cbNik.setText(resourceMap.getString("cbNik.text")); // NOI18N
+        cbNik.setName("cbNik"); // NOI18N
+        cbNik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNikActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbNik);
+        cbNik.setBounds(400, 130, 70, 23);
+
+        jLabel17.setFont(resourceMap.getFont("jLabel17.font")); // NOI18N
+        jLabel17.setForeground(resourceMap.getColor("jLabel17.foreground")); // NOI18N
+        jLabel17.setText(resourceMap.getString("jLabel17.text")); // NOI18N
+        jLabel17.setName("jLabel17"); // NOI18N
+        jPanel1.add(jLabel17);
+        jLabel17.setBounds(10, 220, 140, 15);
+
+        jScrollPane3.setName("jScrollPane3"); // NOI18N
+
+        txtAlamatPemilik.setColumns(20);
+        txtAlamatPemilik.setRows(5);
+        txtAlamatPemilik.setName("txtAlamatPemilik"); // NOI18N
+        jScrollPane3.setViewportView(txtAlamatPemilik);
+
+        jPanel1.add(jScrollPane3);
+        jScrollPane3.setBounds(180, 220, 460, 40);
+
+        txtNIK.setText(resourceMap.getString("txtNIK.text")); // NOI18N
+        txtNIK.setFont(resourceMap.getFont("txtNIK.font")); // NOI18N
+        txtNIK.setName("txtNIK"); // NOI18N
+        jPanel1.add(txtNIK);
+        txtNIK.setBounds(400, 160, 240, 21);
+
+        jLabel18.setFont(resourceMap.getFont("jLabel18.font")); // NOI18N
+        jLabel18.setForeground(resourceMap.getColor("jLabel18.foreground")); // NOI18N
+        jLabel18.setText(resourceMap.getString("jLabel18.text")); // NOI18N
+        jLabel18.setName("jLabel18"); // NOI18N
+        jPanel1.add(jLabel18);
+        jLabel18.setBounds(400, 80, 120, 15);
+
+        cboJenisPajak.setFont(resourceMap.getFont("cboJenisPajak.font")); // NOI18N
+        cboJenisPajak.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "010-Bukan Pemungut PPN", "020-Pemungut Bendaharawan" }));
+        cboJenisPajak.setName("cboJenisPajak"); // NOI18N
+        jPanel1.add(cboJenisPajak);
+        cboJenisPajak.setBounds(530, 80, 210, 21);
+
+        jTabbedPane1.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
+
+        jPanel2.setBackground(resourceMap.getColor("jPanel2.background")); // NOI18N
+        jPanel2.setName("jPanel2"); // NOI18N
+        jPanel2.setLayout(null);
+
+        jLabel9.setFont(resourceMap.getFont("jLabel9.font")); // NOI18N
+        jLabel9.setForeground(resourceMap.getColor("jLabel9.foreground")); // NOI18N
+        jLabel9.setText(resourceMap.getString("jLabel9.text")); // NOI18N
+        jLabel9.setName("jLabel9"); // NOI18N
+        jPanel2.add(jLabel9);
+        jLabel9.setBounds(10, 20, 120, 16);
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -241,33 +401,136 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(txtAlamat);
 
-        panelCool1.add(jScrollPane1);
-        jScrollPane1.setBounds(200, 150, 370, 50);
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(180, 20, 330, 50);
 
-        jLabel6.setFont(resourceMap.getFont("jLabel6.font")); // NOI18N
-        jLabel6.setForeground(resourceMap.getColor("jLabel6.foreground")); // NOI18N
-        jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
-        jLabel6.setName("jLabel6"); // NOI18N
-        panelCool1.add(jLabel6);
-        jLabel6.setBounds(30, 95, 120, 16);
+        jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
+        jLabel1.setForeground(resourceMap.getColor("jLabel1.foreground")); // NOI18N
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(10, 110, 80, 15);
 
-        txtNohp.setFont(resourceMap.getFont("txtNohp.font")); // NOI18N
-        txtNohp.setText(resourceMap.getString("txtNohp.text")); // NOI18N
-        txtNohp.setName("txtNohp"); // NOI18N
-        txtNohp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNohpKeyPressed(evt);
+        cboPropinsi.setFont(resourceMap.getFont("jComboBox2.font")); // NOI18N
+        cboPropinsi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboPropinsi.setName("cboPropinsi"); // NOI18N
+        cboPropinsi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboPropinsiActionPerformed(evt);
             }
         });
-        panelCool1.add(txtNohp);
-        txtNohp.setBounds(200, 120, 160, 21);
+        jPanel2.add(cboPropinsi);
+        cboPropinsi.setBounds(180, 110, 330, 21);
+
+        jLabel13.setFont(resourceMap.getFont("jLabel13.font")); // NOI18N
+        jLabel13.setForeground(resourceMap.getColor("jLabel13.foreground")); // NOI18N
+        jLabel13.setText(resourceMap.getString("jLabel13.text")); // NOI18N
+        jLabel13.setName("jLabel13"); // NOI18N
+        jPanel2.add(jLabel13);
+        jLabel13.setBounds(10, 140, 100, 15);
+
+        cboKabupaten.setFont(resourceMap.getFont("cboKabupaten.font")); // NOI18N
+        cboKabupaten.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboKabupaten.setName("cboKabupaten"); // NOI18N
+        cboKabupaten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboKabupatenActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cboKabupaten);
+        cboKabupaten.setBounds(180, 140, 330, 21);
+
+        jLabel12.setFont(resourceMap.getFont("jLabel12.font")); // NOI18N
+        jLabel12.setForeground(resourceMap.getColor("jLabel12.foreground")); // NOI18N
+        jLabel12.setText(resourceMap.getString("jLabel12.text")); // NOI18N
+        jLabel12.setName("jLabel12"); // NOI18N
+        jPanel2.add(jLabel12);
+        jLabel12.setBounds(10, 170, 90, 15);
+
+        cboKecamatan.setFont(resourceMap.getFont("jComboBox2.font")); // NOI18N
+        cboKecamatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboKecamatan.setName("cboKecamatan"); // NOI18N
+        cboKecamatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboKecamatanActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cboKecamatan);
+        cboKecamatan.setBounds(180, 170, 330, 21);
+
+        jLabel14.setFont(resourceMap.getFont("jLabel14.font")); // NOI18N
+        jLabel14.setForeground(resourceMap.getColor("jLabel14.foreground")); // NOI18N
+        jLabel14.setText(resourceMap.getString("jLabel14.text")); // NOI18N
+        jLabel14.setName("jLabel14"); // NOI18N
+        jPanel2.add(jLabel14);
+        jLabel14.setBounds(10, 200, 110, 15);
+
+        cboKelurahan.setFont(resourceMap.getFont("jComboBox2.font")); // NOI18N
+        cboKelurahan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboKelurahan.setName("cboKelurahan"); // NOI18N
+        cboKelurahan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboKelurahanActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cboKelurahan);
+        cboKelurahan.setBounds(180, 200, 330, 21);
+
+        jLabel15.setFont(resourceMap.getFont("jLabel15.font")); // NOI18N
+        jLabel15.setForeground(resourceMap.getColor("jLabel15.foreground")); // NOI18N
+        jLabel15.setText(resourceMap.getString("jLabel15.text")); // NOI18N
+        jLabel15.setName("jLabel15"); // NOI18N
+        jPanel2.add(jLabel15);
+        jLabel15.setBounds(10, 230, 150, 14);
+
+        txtKodePos.setFont(resourceMap.getFont("txtKodePos.font")); // NOI18N
+        txtKodePos.setText(resourceMap.getString("txtKodePos.text")); // NOI18N
+        txtKodePos.setName("txtKodePos"); // NOI18N
+        jPanel2.add(txtKodePos);
+        txtKodePos.setBounds(180, 230, 330, 21);
+
+        jLabel16.setFont(resourceMap.getFont("jLabel16.font")); // NOI18N
+        jLabel16.setForeground(resourceMap.getColor("jLabel16.foreground")); // NOI18N
+        jLabel16.setText(resourceMap.getString("jLabel16.text")); // NOI18N
+        jLabel16.setName("jLabel16"); // NOI18N
+        jPanel2.add(jLabel16);
+        jLabel16.setBounds(10, 80, 150, 15);
+
+        txtRT.setText(resourceMap.getString("txtRT.text")); // NOI18N
+        txtRT.setName("txtRT"); // NOI18N
+        jPanel2.add(txtRT);
+        txtRT.setBounds(360, 80, 70, 20);
+
+        txtRW.setText(resourceMap.getString("txtRW.text")); // NOI18N
+        txtRW.setName("txtRW"); // NOI18N
+        jPanel2.add(txtRW);
+        txtRW.setBounds(440, 80, 70, 20);
+
+        txtNomor.setText(resourceMap.getString("txtNomor.text")); // NOI18N
+        txtNomor.setName("txtNomor"); // NOI18N
+        jPanel2.add(txtNomor);
+        txtNomor.setBounds(270, 80, 80, 20);
+
+        txtBlok.setText(resourceMap.getString("txtBlok.text")); // NOI18N
+        txtBlok.setName("txtBlok"); // NOI18N
+        jPanel2.add(txtBlok);
+        txtBlok.setBounds(180, 80, 80, 20);
+
+        jTabbedPane1.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
+
+        getContentPane().add(jTabbedPane1);
+        jTabbedPane1.setBounds(0, 0, 1110, 300);
+
+        panelCool1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelCool1.setName("panelCool1"); // NOI18N
+        panelCool1.setLayout(null);
 
         jLabel7.setFont(resourceMap.getFont("jLabel7.font")); // NOI18N
         jLabel7.setForeground(resourceMap.getColor("jLabel7.foreground")); // NOI18N
         jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
         jLabel7.setName("jLabel7"); // NOI18N
         panelCool1.add(jLabel7);
-        jLabel7.setBounds(40, 340, 60, 16);
+        jLabel7.setBounds(20, 52, 90, 16);
 
         btnInsert.setFont(resourceMap.getFont("btnInsert.font")); // NOI18N
         btnInsert.setIcon(resourceMap.getIcon("btnInsert.icon")); // NOI18N
@@ -279,7 +542,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnInsert);
-        btnInsert.setBounds(30, 300, 90, 25);
+        btnInsert.setBounds(20, 12, 120, 25);
 
         btnUpdate.setFont(resourceMap.getFont("btnUpdate.font")); // NOI18N
         btnUpdate.setIcon(resourceMap.getIcon("btnUpdate.icon")); // NOI18N
@@ -291,7 +554,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnUpdate);
-        btnUpdate.setBounds(120, 300, 100, 25);
+        btnUpdate.setBounds(150, 12, 110, 25);
 
         btnDelete.setFont(resourceMap.getFont("btnDelete.font")); // NOI18N
         btnDelete.setIcon(resourceMap.getIcon("btnDelete.icon")); // NOI18N
@@ -303,18 +566,15 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnDelete);
-        btnDelete.setBounds(220, 300, 100, 25);
-
-        jSeparator1.setName("jSeparator1"); // NOI18N
-        panelCool1.add(jSeparator1);
-        jSeparator1.setBounds(30, 290, 620, 10);
+        btnDelete.setBounds(270, 12, 130, 25);
 
         jSeparator2.setName("jSeparator2"); // NOI18N
         panelCool1.add(jSeparator2);
-        jSeparator2.setBounds(30, 330, 620, 10);
+        jSeparator2.setBounds(20, 44, 1070, 10);
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setName("jTable1"); // NOI18N
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -324,14 +584,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jTable1);
 
         panelCool1.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 370, 660, 260);
-
-        jLabel8.setFont(resourceMap.getFont("jLabel8.font")); // NOI18N
-        jLabel8.setForeground(resourceMap.getColor("jLabel8.foreground")); // NOI18N
-        jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
-        jLabel8.setName("jLabel8"); // NOI18N
-        panelCool1.add(jLabel8);
-        jLabel8.setBounds(30, 258, 120, 16);
+        jScrollPane2.setBounds(10, 80, 1090, 240);
 
         txtKriteria.setFont(resourceMap.getFont("txtKriteria.font")); // NOI18N
         txtKriteria.setText(resourceMap.getString("txtKriteria.text")); // NOI18N
@@ -342,7 +595,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(txtKriteria);
-        txtKriteria.setBounds(290, 340, 240, 21);
+        txtKriteria.setBounds(340, 52, 220, 21);
 
         btnFilter.setFont(resourceMap.getFont("btnFilter.font")); // NOI18N
         btnFilter.setIcon(resourceMap.getIcon("btnFilter.icon")); // NOI18N
@@ -354,7 +607,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnFilter);
-        btnFilter.setBounds(540, 340, 110, 25);
+        btnFilter.setBounds(570, 52, 110, 25);
 
         btnCancel.setFont(resourceMap.getFont("btnCancel.font")); // NOI18N
         btnCancel.setIcon(resourceMap.getIcon("btnCancel.icon")); // NOI18N
@@ -366,33 +619,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnCancel);
-        btnCancel.setBounds(350, 300, 110, 25);
-
-        lblKodeAkun.setFont(resourceMap.getFont("lblKodeAkun.font")); // NOI18N
-        lblKodeAkun.setForeground(resourceMap.getColor("lblKodeAkun.foreground")); // NOI18N
-        lblKodeAkun.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblKodeAkun.setName("lblKodeAkun"); // NOI18N
-        panelCool1.add(lblKodeAkun);
-        lblKodeAkun.setBounds(370, 50, 230, 20);
-
-        jLabel9.setFont(resourceMap.getFont("jLabel9.font")); // NOI18N
-        jLabel9.setForeground(resourceMap.getColor("jLabel9.foreground")); // NOI18N
-        jLabel9.setText(resourceMap.getString("jLabel9.text")); // NOI18N
-        jLabel9.setName("jLabel9"); // NOI18N
-        panelCool1.add(jLabel9);
-        jLabel9.setBounds(30, 160, 120, 16);
-
-        txtNIK.setFont(resourceMap.getFont("txtNIK.font")); // NOI18N
-        txtNIK.setText(resourceMap.getString("txtNIK.text")); // NOI18N
-        txtNIK.setName("txtNIK"); // NOI18N
-        panelCool1.add(txtNIK);
-        txtNIK.setBounds(420, 200, 230, 21);
-
-        CheckCabang.setFont(resourceMap.getFont("CheckCabang.font")); // NOI18N
-        CheckCabang.setText(resourceMap.getString("CheckCabang.text")); // NOI18N
-        CheckCabang.setName("CheckCabang"); // NOI18N
-        panelCool1.add(CheckCabang);
-        CheckCabang.setBounds(500, 20, 100, 23);
+        btnCancel.setBounds(410, 12, 120, 25);
 
         btnKeluar.setFont(resourceMap.getFont("btnKeluar.font")); // NOI18N
         btnKeluar.setIcon(resourceMap.getIcon("btnKeluar.icon")); // NOI18N
@@ -404,79 +631,24 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnKeluar);
-        btnKeluar.setBounds(470, 300, 120, 25);
-
-        jLabel10.setFont(resourceMap.getFont("jLabel10.font")); // NOI18N
-        jLabel10.setForeground(resourceMap.getColor("jLabel10.foreground")); // NOI18N
-        jLabel10.setText(resourceMap.getString("jLabel10.text")); // NOI18N
-        jLabel10.setName("jLabel10"); // NOI18N
-        panelCool1.add(jLabel10);
-        jLabel10.setBounds(30, 205, 120, 16);
-
-        namaPemilik.setFont(resourceMap.getFont("namaPemilik.font")); // NOI18N
-        namaPemilik.setText(resourceMap.getString("namaPemilik.text")); // NOI18N
-        namaPemilik.setName("namaPemilik"); // NOI18N
-        panelCool1.add(namaPemilik);
-        namaPemilik.setBounds(200, 230, 330, 21);
+        btnKeluar.setBounds(540, 12, 140, 25);
 
         cboAktif.setFont(resourceMap.getFont("cboAktif.font")); // NOI18N
-        cboAktif.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aktif", "Non Aktif" }));
+        cboAktif.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aktif", "Non Aktif", "New Record" }));
         cboAktif.setName("cboAktif"); // NOI18N
         panelCool1.add(cboAktif);
-        cboAktif.setBounds(100, 340, 78, 22);
-
-        jLabel11.setFont(resourceMap.getFont("jLabel11.font")); // NOI18N
-        jLabel11.setForeground(resourceMap.getColor("jLabel11.foreground")); // NOI18N
-        jLabel11.setText(resourceMap.getString("jLabel11.text")); // NOI18N
-        jLabel11.setName("jLabel11"); // NOI18N
-        panelCool1.add(jLabel11);
-        jLabel11.setBounds(30, 230, 120, 16);
-
-        cboStatus.setFont(resourceMap.getFont("cboStatus.font")); // NOI18N
-        cboStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aktif", "Tidak Aktif" }));
-        cboStatus.setName("cboStatus"); // NOI18N
-        panelCool1.add(cboStatus);
-        cboStatus.setBounds(200, 258, 130, 22);
+        cboAktif.setBounds(120, 52, 100, 22);
 
         cboKriteria.setFont(resourceMap.getFont("cboKriteria.font")); // NOI18N
         cboKriteria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kode", "Nama" }));
         cboKriteria.setName("cboKriteria"); // NOI18N
         panelCool1.add(cboKriteria);
-        cboKriteria.setBounds(190, 340, 90, 22);
+        cboKriteria.setBounds(230, 52, 100, 22);
 
-        txtNPWP.setText(resourceMap.getString("txtNPWP.text")); // NOI18N
-        txtNPWP.setFont(resourceMap.getFont("txtNPWP.font")); // NOI18N
-        txtNPWP.setName("txtNPWP"); // NOI18N
-        panelCool1.add(txtNPWP);
-        txtNPWP.setBounds(200, 200, 210, 21);
+        getContentPane().add(panelCool1);
+        panelCool1.setBounds(0, 300, 1110, 330);
 
-        cbNik.setFont(resourceMap.getFont("cbNik.font")); // NOI18N
-        cbNik.setText(resourceMap.getString("cbNik.text")); // NOI18N
-        cbNik.setName("cbNik"); // NOI18N
-        cbNik.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNikActionPerformed(evt);
-            }
-        });
-        panelCool1.add(cbNik);
-        cbNik.setBounds(580, 170, 70, 23);
-
-        jLabel18.setFont(resourceMap.getFont("jLabel18.font")); // NOI18N
-        jLabel18.setForeground(resourceMap.getColor("jLabel18.foreground")); // NOI18N
-        jLabel18.setText(resourceMap.getString("jLabel18.text")); // NOI18N
-        jLabel18.setName("jLabel18"); // NOI18N
-        panelCool1.add(jLabel18);
-        jLabel18.setBounds(340, 260, 90, 15);
-
-        cboJenisPajak.setFont(resourceMap.getFont("cboJenisPajak.font")); // NOI18N
-        cboJenisPajak.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "010-Bukan Pemungut PPN", "020-Pemungut Bendaharawan" }));
-        cboJenisPajak.setName("cboJenisPajak"); // NOI18N
-        panelCool1.add(cboJenisPajak);
-        cboJenisPajak.setBounds(440, 260, 210, 21);
-
-        getContentPane().add(panelCool1, java.awt.BorderLayout.CENTER);
-
-        setBounds(0, 0, 700, 665);
+        setBounds(0, 0, 1132, 665);
     }// </editor-fold>//GEN-END:initComponents
 
 private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
@@ -485,7 +657,7 @@ private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         c.createStatement().execute("set autocommit false");
         int x = JOptionPane.showConfirmDialog(this, "Apakah Data Akan Disimpan?", "", JOptionPane.YES_NO_OPTION);
         if (x == 0) {
-            if ((txtNamaPelanggan.getText().equals("")) || (txtkodePelanggan.getText().equals("")) || (txtbatasKredit.getText().equals("")) || (txtNohp.getText().equals("")) || (txtAlamat.getText().equals("")) || (txtNIK.getText().equals(""))) {
+            if ((txtNamaPelanggan.getText().equals("")) || (txtkodePelanggan.getText().equals("")) || (txtbatasKredit.getText().equals("")) || (txtNohp.getText().equals("")) || (txtAlamat.getText().equals("")) || (txtNPWP.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, "Data Belum Lengkap.. !");
                 txtNamaPelanggan.requestFocus();
             } else {
@@ -509,14 +681,11 @@ private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             Logger.getLogger(FormPelanggan.class.getName()).log(Level.SEVERE, null, ex1);
         }
     } finally {
-//                if (c != null) {
         try {
             c.createStatement().execute("set autocommit true");
-//                        c.close();
         } catch (SQLException ex) {
             Logger.getLogger(FormPelanggan.class.getName()).log(Level.SEVERE, null, ex);
         }
-//                }
     }
 }//GEN-LAST:event_btnInsertActionPerformed
 
@@ -524,6 +693,7 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     try {
         // TODO add your handling code here:
         Calendar c1 = Calendar.getInstance();
+
         p = dbpelanggan.getDetails(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         try {
             c1.setTime(d.parse(p.getTGLREG()));
@@ -552,14 +722,19 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         cbNik.setSelected(p.isNIK());
         namaPemilik.setText(p.getNAMAPEMILIK());
         cboStatus.setSelectedIndex(p.getSTATUSAKTIF());
-//        if(p.getSTATUSCABANG().equals("1")){
-//            CheckCabang.setSelected(true);
-//        }else{
-//            CheckCabang.setSelected(false);
-//        }
+        cboPropinsi.setSelectedItem(p.getPROPINSI());
+        cboKabupaten.setSelectedItem(p.getKABUPATEN());
+        cboKecamatan.setSelectedItem(p.getKECAMATAN());
+        cboKelurahan.setSelectedItem(p.getKELURAHAN());
+        txtKodePos.setText(p.getKODEPOS());
+        txtRT.setText(p.getRT());
+        txtRW.setText(p.getRW());
+        txtNomor.setText(p.getNOMOR());
+        txtBlok.setText(p.getBLOK());
+        cboJenisPajak.setSelectedIndex(getIndexCboJenisPajak(p.getJENISPAJAK()));
         txtkodePelanggan.requestFocus();
         cektombol();
-    } catch (SQLException ex) {
+    } catch (Exception ex) {
         Logger.getLogger(FormPelanggan.class.getName()).log(Level.SEVERE, null, ex);
     }
 
@@ -571,7 +746,7 @@ private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         c.createStatement().execute("set autocommit false");
         int x = JOptionPane.showConfirmDialog(this, "Apakah Data Akan Diedit?", "", JOptionPane.YES_NO_OPTION);
         if (x == 0) {
-            if ((txtNamaPelanggan.getText().equals("")) || (txtkodePelanggan.getText().equals("")) || (txtbatasKredit.getText().equals("")) || (txtNohp.getText().equals("")) || (txtAlamat.getText().equals("")) || (txtNIK.getText().equals(""))) {
+            if ((txtNamaPelanggan.getText().equals("")) || (txtkodePelanggan.getText().equals("")) || (txtbatasKredit.getText().equals("")) || (txtNohp.getText().equals("")) || (txtAlamat.getText().equals("")) || (txtNPWP.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, "Data Belum Lengkap.. !");
                 txtNamaPelanggan.requestFocus();
             } else {
@@ -709,6 +884,53 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
+    private void cboPropinsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPropinsiActionPerformed
+        // TODO add your handling code here:
+        if (cboPropinsi.getSelectedItem() != null) {
+            try {
+                isiComboKabupaten(cboPropinsi.getSelectedItem().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(FormPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cboPropinsiActionPerformed
+
+    private void cboKabupatenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboKabupatenActionPerformed
+        // TODO add your handling code here:
+        if (cboPropinsi.getSelectedItem() != null && cboKabupaten.getSelectedItem() != null) {
+            try {
+                isiComboKecamatan(cboPropinsi.getSelectedItem().toString(), cboKabupaten.getSelectedItem().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(FormPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cboKabupatenActionPerformed
+
+    private void cboKecamatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboKecamatanActionPerformed
+        // TODO add your handling code here:
+        if (cboKecamatan.getSelectedItem() != null) {
+            try {
+                isiComboKelurahan(cboPropinsi.getSelectedItem().toString(), cboKabupaten.getSelectedItem().toString(), cboKecamatan.getSelectedItem().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(FormPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cboKecamatanActionPerformed
+
+    private void cboKelurahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboKelurahanActionPerformed
+        try {
+            // TODO add your handling code here:
+            if (cboPropinsi.getSelectedItem() != null
+                    && cboKabupaten.getSelectedItem() != null
+                    && cboKecamatan.getSelectedItem() != null
+                    && cboKelurahan.getSelectedItem() != null) {
+                isiKodePos();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cboKelurahanActionPerformed
+
     private void cbNikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNikActionPerformed
         // TODO add your handling code here:
         if (cbNik.isSelected()) {
@@ -733,11 +955,22 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
     private javax.swing.JCheckBox cbNik;
     private javax.swing.JComboBox cboAktif;
     private javax.swing.JComboBox<String> cboJenisPajak;
+    private javax.swing.JComboBox<String> cboKabupaten;
+    private javax.swing.JComboBox<String> cboKecamatan;
+    private javax.swing.JComboBox<String> cboKelurahan;
     private javax.swing.JComboBox cboKriteria;
+    private javax.swing.JComboBox<String> cboPropinsi;
     private javax.swing.JComboBox cboStatus;
     private datechooser.beans.DateChooserCombo dateTglReg;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -747,20 +980,29 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblKodeAkun;
     private javax.swing.JTextField namaPemilik;
     private com.erv.function.PanelCool panelCool1;
     private javax.swing.JTextArea txtAlamat;
+    private javax.swing.JTextArea txtAlamatPemilik;
+    private javax.swing.JTextField txtBlok;
+    private javax.swing.JTextField txtKodePos;
     private javax.swing.JTextField txtKriteria;
-    private javax.swing.JTextField txtNIK;
+    private javax.swing.JFormattedTextField txtNIK;
     private javax.swing.JFormattedTextField txtNPWP;
     private javax.swing.JTextField txtNamaPelanggan;
     private javax.swing.JTextField txtNohp;
+    private javax.swing.JTextField txtNomor;
+    private javax.swing.JTextField txtRT;
+    private javax.swing.JTextField txtRW;
     private javax.swing.JFormattedTextField txtbatasKredit;
     private javax.swing.JTextField txtkodePelanggan;
     // End of variables declaration//GEN-END:variables
@@ -772,8 +1014,13 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         txtNohp.setText("");
         txtbatasKredit.setValue(new Integer(0));
         lblKodeAkun.setText("");
-        txtNIK.setText("");
+        txtNPWP.setText("");
         namaPemilik.setText("");
+        txtKodePos.setText("");
+        txtRT.setText("");
+        txtRW.setText("");
+        txtNomor.setText("");
+        txtBlok.setText("-");
         CheckCabang.setVisible(false);
     }
 
@@ -782,11 +1029,11 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
             JDBCAdapter j = new JDBCAdapter(c);
             String sql = "";
             if (index == 0) {
-                //sql = "SELECT KODEPELANGGAN,NAMA ,ALAMAT ,HP ,TGLREG ,BATASKREDIT ,NPWP,KODEAKUN,case STATUSAKTIF when 0 then 'Aktif' when 1 then 'Tidak Aktif' end as StatAktif FROM PELANGGAN where STATUSAKTIF='0' ";
-                sql = "SELECT KODEPELANGGAN,NAMA ,ALAMAT ,HP ,TGLREG ,NPWP,KODEAKUN,case STATUSAKTIF when 0 then 'Aktif' when 1 then 'Tidak Aktif' end as StatAktif FROM PELANGGAN where STATUSAKTIF='0' ";
-            } else {
-                //sql = "SELECT KODEPELANGGAN,NAMA ,ALAMAT ,HP ,TGLREG ,BATASKREDIT ,NPWP,KODEAKUN,case STATUSAKTIF when 0 then 'Aktif' when 1 then 'Tidak Aktif' end as StatAktif FROM PELANGGAN where STATUSAKTIF='1' ";
-                sql = "SELECT KODEPELANGGAN,NAMA ,ALAMAT ,HP ,TGLREG ,NPWP,KODEAKUN,case STATUSAKTIF when 0 then 'Aktif' when 1 then 'Tidak Aktif' end as StatAktif FROM PELANGGAN where STATUSAKTIF='1' ";
+                sql = "SELECT KODEPELANGGAN AS KODE,NAMA ,ALAMAT ,NAMAPEMILIK ,HP ,TGLREG ,NPWP,case STATUSAKTIF when 0 then 'Aktif' when 1 then 'Tidak Aktif' when 2 then 'New Record' end as StatAktif FROM PELANGGAN where STATUSAKTIF='0' ";
+            } else if (index == 1) {
+                sql = "SELECT KODEPELANGGAN AS KODE,NAMA ,ALAMAT ,NAMAPEMILIK ,HP ,TGLREG ,NPWP,case STATUSAKTIF when 0 then 'Aktif' when 1 then 'Tidak Aktif' when 2 then 'New Record' end as StatAktif FROM PELANGGAN where STATUSAKTIF='1' ";
+            } else if (index == 2) {
+                sql = "SELECT KODEPELANGGAN AS KODE,NAMA ,ALAMAT ,NAMAPEMILIK ,HP ,TGLREG ,NPWP,case STATUSAKTIF when 0 then 'Aktif' when 1 then 'Tidak Aktif' when 2 then 'New Record' end as StatAktif FROM PELANGGAN where STATUSAKTIF='2' ";
             }
             if (cboKriteria.getSelectedIndex() == 0) {
                 sql += " AND lower(KODEPELANGGAN) like '" + txtKriteria.getText().toLowerCase() + "%' ORDER BY NAMA";
@@ -796,21 +1043,38 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
             }
             //System.out.println(sql);
             j.executeQuery(sql);
+            
             jScrollPane2.getViewport().remove(jTable1);
             jTable1 = new JTable(j);
             jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     jTable1MouseClicked(evt);
                 }
             });
             TableColumn col = jTable1.getColumnModel().getColumn(0);
-            col.setPreferredWidth(50);
+            col.setPreferredWidth(35);
             col = jTable1.getColumnModel().getColumn(1);
             col.setPreferredWidth(250);
+            col = jTable1.getColumnModel().getColumn(2);
+            col.setPreferredWidth(250);
+            col = jTable1.getColumnModel().getColumn(3);
+            col.setPreferredWidth(180);
+            col = jTable1.getColumnModel().getColumn(4);
+            col.setPreferredWidth(75);
+            col = jTable1.getColumnModel().getColumn(5);
+            col.setPreferredWidth(60);
+            col = jTable1.getColumnModel().getColumn(6);
+            col.setPreferredWidth(120);
+            col = jTable1.getColumnModel().getColumn(7);
+            col.setPreferredWidth(50);
+            //jTable1.setRowHeight(20);
+            //jTable1.setFont(new Font("Tahoma", Font.BOLD, 12));
             jScrollPane2.getViewport().add(jTable1);
             jScrollPane2.repaint();
+            
+            jTable1.setModel(j);
+            //jTable1.setAutoCreateRowSorter(true);
             j.close();
         } catch (Exception ex) {
             Logger.getLogger(FormPelanggan.class.getName()).log(Level.SEVERE, null, ex);
@@ -818,6 +1082,7 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
     }
 
     void prosesUpdate(int pil) throws SQLException {
+        p = new pelanggan();
         p.setKODEPELANGGAN(txtkodePelanggan.getText());
         p.setNAMA(txtNamaPelanggan.getText());
         p.setALAMAT(txtAlamat.getText());
@@ -832,18 +1097,29 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
             p.setNPWP(txtNPWP.getValue().toString());
         }
         p.setNIK(cbNik.isSelected());
+
 //        if (CheckCabang.isSelected()) {
 //            p.setSTATUSCABANG("1");
 //        }else{
         p.setSTATUSCABANG("0");
         p.setNAMAPEMILIK(namaPemilik.getText());
-        p.setSTATUSAKTIF(cboStatus.getSelectedIndex());
+        if (JavarieSoftApp.groupuser.equals("Master Data")) {
+            p.setSTATUSAKTIF(2);
+        } else {
+            p.setSTATUSAKTIF(cboStatus.getSelectedIndex());
+        }
+        p.setPROPINSI(cboPropinsi.getSelectedItem().toString());
+        p.setKABUPATEN(cboKabupaten.getSelectedItem().toString());
+        p.setKECAMATAN(cboKecamatan.getSelectedItem().toString());
+        p.setKELURAHAN(cboKelurahan.getSelectedItem().toString());
+        p.setKODEPOS(txtKodePos.getText());
+        p.setRT(txtRT.getText());
+        p.setRW(txtRW.getText());
+        p.setNOMOR(txtNomor.getText());
+        p.setBLOK(txtBlok.getText());
+        p.setALAMATPEMILIK(txtAlamatPemilik.getText());
         String tempJenisPajak[] = cboJenisPajak.getSelectedItem().toString().split("-");
         p.setJENISPAJAK(tempJenisPajak[0]); 
-        
-//        }
-//        try {
-
         boolean stat;
         if (pil == 0) {
             stat = dbpelanggan.insert(p);
@@ -855,10 +1131,6 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         } else {
             JOptionPane.showMessageDialog(this, "Update Data Gagal");
         }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(this, ex.toString());
-//        }
-
     }
 
     void prosesUpdateAkun(int pil) {
@@ -936,9 +1208,111 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
             settingtombol(true, true, false);
         } else if (JavarieSoftApp.groupuser.equals("Master Data")) {
             settingtombol(true, false, false);
+            cboStatus.setSelectedIndex(2);
+            cboStatus.setEnabled(false);
         }
     }
-    
+
+    void isiCombo() throws SQLException {
+        cboPropinsi.removeAllItems();
+//        cboKabupaten.removeAllItems();
+//        cboKecamatan.removeAllItems();
+//        cboKelurahan.removeAllItems();
+        String sql = "select distinct propinsi from wilayah order by propinsi";
+        Statement stat = c.createStatement();
+        ResultSet rs = stat.executeQuery(sql);
+        while (rs.next()) {
+            cboPropinsi.addItem(rs.getString(1));
+        }
+//        sql = "select distinct kabupaten from wilayah order by kabupaten";
+//        rs = stat.executeQuery(sql);
+//        while (rs.next()) {
+//            cboKabupaten.addItem(rs.getString(1));
+//        }
+//        sql = "select distinct kecamatan from wilayah order by kecamatan";
+//        rs = stat.executeQuery(sql);
+//        while (rs.next()) {
+//            cboKecamatan.addItem(rs.getString(1));
+//        }
+//        sql = "select distinct kelurahan from wilayah order by kelurahan";
+//        rs = stat.executeQuery(sql);
+//        while (rs.next()) {
+//            cboKelurahan.addItem(rs.getString(1));
+//        }
+        rs.close();
+        stat.close();
+    }
+
+    void isiComboPropinsi() throws SQLException {
+        cboPropinsi.removeAllItems();
+        String sql = "select distinct propinsi from wilayah order by propinsi";
+        Statement stat = c.createStatement();
+        ResultSet rs = stat.executeQuery(sql);
+        while (rs.next()) {
+            cboPropinsi.addItem(rs.getString(1));
+        }
+        rs.close();
+        stat.close();
+    }
+
+    void isiComboKabupaten(String propinsi) throws SQLException {
+        cboKabupaten.removeAllItems();
+        String sql1 = "select distinct kabupaten from wilayah where propinsi='" + propinsi + "' order by kabupaten";
+        Statement stat = c.createStatement();
+        ResultSet rs1 = stat.executeQuery(sql1);
+        while (rs1.next()) {
+            cboKabupaten.addItem(rs1.getString(1));
+        }
+        rs1.close();
+        stat.close();
+    }
+
+    void isiComboKecamatan(String propinsi, String kabupaten) throws SQLException {
+        cboKecamatan.removeAllItems();
+        String sql1 = "select distinct kecamatan from wilayah where propinsi='" + propinsi + "' and kabupaten='" + kabupaten + "' order by kecamatan";
+        Statement stat = c.createStatement();
+        ResultSet rs1 = stat.executeQuery(sql1);
+        while (rs1.next()) {
+            cboKecamatan.addItem(rs1.getString(1));
+        }
+        rs1.close();
+        stat.close();
+    }
+
+    void isiComboKelurahan(String propinsi, String kabupaten, String kecamatan) throws SQLException {
+        cboKelurahan.removeAllItems();
+        String sql1 = "select distinct kelurahan from wilayah where propinsi='" + propinsi + "' and kabupaten='" + kabupaten + "' and kecamatan='" + kecamatan + "' order by kelurahan";
+        Statement ps = c.createStatement();
+        ResultSet rs1 = ps.executeQuery(sql1);
+        while (rs1.next()) {
+            cboKelurahan.addItem(rs1.getString(1));
+        }
+        rs1.close();
+        ps.close();
+    }
+
+    private void isiKodePos() throws SQLException {
+        String propinsi = cboPropinsi.getSelectedItem().toString();
+        String kabupaten = cboKabupaten.getSelectedItem().toString();
+        String kecamatan = cboKecamatan.getSelectedItem().toString();
+        String kelurahan = cboKelurahan.getSelectedItem().toString();
+        String sql = "select kodepos from WILAYAH "
+                + "where PROPINSI='" + propinsi + "' "
+                + "and KABUPATEN='" + kabupaten + "' "
+                + "and KECAMATAN='" + kecamatan + "' "
+                + "and KELURAHAN='" + kelurahan + "' "
+                + "";
+        Statement stat = c.createStatement();
+        ResultSet rs = stat.executeQuery(sql);
+        if (rs.next()) {
+            txtKodePos.setText(rs.getString(1));
+        } else {
+            txtKodePos.setText("-");
+        }
+        rs.close();
+        stat.close();
+    }
+
     MaskFormatter createFormatter(String s) {
         MaskFormatter formatter = null;
         try {
@@ -949,7 +1323,7 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         }
         return formatter;
     }
-    
+
     String getFormatNPWP(String npwp) {
         //12.212.122.2-233.3333
         String hasil = "";
@@ -969,8 +1343,6 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         }
         return hasil;
     }
-    
-    
     private int getIndexCboJenisPajak(String jenispajak) {
         for (int i = 0; i < cboJenisPajak.getItemCount(); i++) {
             String data[] = cboJenisPajak.getItemAt(i).split("-");
@@ -980,4 +1352,5 @@ private void txtNamaPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         }
         return 0;
     }
+
 }
