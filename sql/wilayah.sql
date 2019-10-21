@@ -1,0 +1,20 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ * Author:  USER
+ * Created: Jul 4, 2019
+ */
+CREATE TABLE PUBLIC.WILAYAH (
+    ID SERIAL,
+    PROPINSI VARCHAR(30) NOT NULL,
+    KABUPATEN VARCHAR(50) NOT NULL,
+    KECAMATAN VARCHAR(50) NOT NULL,
+    KELURAHAN VARCHAR(50) NOT NULL,
+    KODEPOS VARCHAR(10) NOT NULL
+);
+
+ALTER TABLE PUBLIC.WILAYAH ADD CONSTRAINT CONSTRAINT_WILAYAH PRIMARY KEY (ID);
+ALTER TABLE PUBLIC.WILAYAH ADD CONSTRAINT IDX_WILAYAH UNIQUE (PROPINSI,KABUPATEN,KECAMATAN,KELURAHAN);
