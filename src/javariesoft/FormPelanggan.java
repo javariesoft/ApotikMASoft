@@ -156,7 +156,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         cboKriteria = new javax.swing.JComboBox();
 
         setClosable(true);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(javariesoft.JavarieSoftApp.class).getContext().getResourceMap(FormPelanggan.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(FormPelanggan.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -191,7 +191,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 10, 120, 16);
+        jLabel3.setBounds(10, 10, 120, 15);
 
         txtNamaPelanggan.setFont(resourceMap.getFont("txtNamaPelanggan.font")); // NOI18N
         txtNamaPelanggan.setText(resourceMap.getString("txtNamaPelanggan.text")); // NOI18N
@@ -219,7 +219,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 40, 120, 16);
+        jLabel2.setBounds(10, 40, 120, 15);
 
         txtkodePelanggan.setEditable(false);
         txtkodePelanggan.setFont(resourceMap.getFont("txtkodePelanggan.font")); // NOI18N
@@ -228,23 +228,23 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jPanel1.add(txtkodePelanggan);
         txtkodePelanggan.setBounds(180, 40, 160, 21);
 
-        jLabel4.setFont(resourceMap.getFont("jLabel4.font")); // NOI18N
+        jLabel4.setFont(resourceMap.getFont("jLabel5.font")); // NOI18N
         jLabel4.setForeground(resourceMap.getColor("jLabel4.foreground")); // NOI18N
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 70, 120, 16);
+        jLabel4.setBounds(10, 70, 120, 15);
 
         dateTglReg.setFieldFont(resourceMap.getFont("dateTglReg.dch_combo_fieldFont")); // NOI18N
         jPanel1.add(dateTglReg);
         dateTglReg.setBounds(180, 70, 155, 20);
 
-        jLabel6.setFont(resourceMap.getFont("jLabel6.font")); // NOI18N
+        jLabel6.setFont(resourceMap.getFont("jLabel5.font")); // NOI18N
         jLabel6.setForeground(resourceMap.getColor("jLabel6.foreground")); // NOI18N
         jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
         jLabel6.setName("jLabel6"); // NOI18N
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 100, 120, 16);
+        jLabel6.setBounds(10, 100, 120, 15);
 
         txtbatasKredit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
         txtbatasKredit.setText(resourceMap.getString("txtbatasKredit.text")); // NOI18N
@@ -263,7 +263,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
         jLabel5.setName("jLabel5"); // NOI18N
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 130, 120, 16);
+        jLabel5.setBounds(10, 130, 120, 15);
 
         txtNohp.setFont(resourceMap.getFont("txtNohp.font")); // NOI18N
         txtNohp.setText(resourceMap.getString("txtNohp.text")); // NOI18N
@@ -276,19 +276,19 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jPanel1.add(txtNohp);
         txtNohp.setBounds(180, 130, 210, 21);
 
-        jLabel10.setFont(resourceMap.getFont("jLabel10.font")); // NOI18N
+        jLabel10.setFont(resourceMap.getFont("jLabel5.font")); // NOI18N
         jLabel10.setForeground(resourceMap.getColor("jLabel10.foreground")); // NOI18N
         jLabel10.setText(resourceMap.getString("jLabel10.text")); // NOI18N
         jLabel10.setName("jLabel10"); // NOI18N
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(10, 160, 120, 16);
+        jLabel10.setBounds(10, 160, 120, 15);
 
         jLabel11.setFont(resourceMap.getFont("jLabel11.font")); // NOI18N
         jLabel11.setForeground(resourceMap.getColor("jLabel11.foreground")); // NOI18N
         jLabel11.setText(resourceMap.getString("jLabel11.text")); // NOI18N
         jLabel11.setName("jLabel11"); // NOI18N
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(10, 190, 120, 16);
+        jLabel11.setBounds(10, 190, 120, 15);
 
         namaPemilik.setFont(resourceMap.getFont("namaPemilik.font")); // NOI18N
         namaPemilik.setText(resourceMap.getString("namaPemilik.text")); // NOI18N
@@ -296,12 +296,12 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jPanel1.add(namaPemilik);
         namaPemilik.setBounds(180, 190, 460, 21);
 
-        jLabel8.setFont(resourceMap.getFont("jLabel8.font")); // NOI18N
+        jLabel8.setFont(resourceMap.getFont("jLabel5.font")); // NOI18N
         jLabel8.setForeground(resourceMap.getColor("jLabel8.foreground")); // NOI18N
         jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
         jLabel8.setName("jLabel8"); // NOI18N
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(400, 50, 120, 16);
+        jLabel8.setBounds(400, 50, 120, 15);
 
         cboStatus.setFont(resourceMap.getFont("cboStatus.font")); // NOI18N
         cboStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aktif", "Tidak Aktif", "New Record" }));
@@ -362,7 +362,7 @@ public class FormPelanggan extends javax.swing.JInternalFrame {
         jPanel1.add(txtNIK);
         txtNIK.setBounds(400, 160, 240, 21);
 
-        jLabel18.setFont(resourceMap.getFont("jLabel18.font")); // NOI18N
+        jLabel18.setFont(resourceMap.getFont("jLabel5.font")); // NOI18N
         jLabel18.setForeground(resourceMap.getColor("jLabel18.foreground")); // NOI18N
         jLabel18.setText(resourceMap.getString("jLabel18.text")); // NOI18N
         jLabel18.setName("jLabel18"); // NOI18N

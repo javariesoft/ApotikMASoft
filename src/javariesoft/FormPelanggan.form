@@ -125,7 +125,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="font" type="java.awt.Font" resourceKey="jLabel4.font"/>
+                <Property name="font" type="java.awt.Font" resourceKey="jLabel5.font"/>
                 <Property name="foreground" type="java.awt.Color" resourceKey="jLabel4.foreground"/>
                 <Property name="text" type="java.lang.String" resourceKey="jLabel4.text"/>
                 <Property name="name" type="java.lang.String" value="jLabel4" noResource="true"/>
@@ -148,7 +148,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="font" type="java.awt.Font" resourceKey="jLabel6.font"/>
+                <Property name="font" type="java.awt.Font" resourceKey="jLabel5.font"/>
                 <Property name="foreground" type="java.awt.Color" resourceKey="jLabel6.foreground"/>
                 <Property name="text" type="java.lang.String" resourceKey="jLabel6.text"/>
                 <Property name="name" type="java.lang.String" value="jLabel6" noResource="true"/>
@@ -207,7 +207,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="font" type="java.awt.Font" resourceKey="jLabel10.font"/>
+                <Property name="font" type="java.awt.Font" resourceKey="jLabel5.font"/>
                 <Property name="foreground" type="java.awt.Color" resourceKey="jLabel10.foreground"/>
                 <Property name="text" type="java.lang.String" resourceKey="jLabel10.text"/>
                 <Property name="name" type="java.lang.String" value="jLabel10" noResource="true"/>
@@ -245,7 +245,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="font" type="java.awt.Font" resourceKey="jLabel8.font"/>
+                <Property name="font" type="java.awt.Font" resourceKey="jLabel5.font"/>
                 <Property name="foreground" type="java.awt.Color" resourceKey="jLabel8.foreground"/>
                 <Property name="text" type="java.lang.String" resourceKey="jLabel8.text"/>
                 <Property name="name" type="java.lang.String" value="jLabel8" noResource="true"/>
@@ -377,7 +377,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
-                <Property name="font" type="java.awt.Font" resourceKey="jLabel18.font"/>
+                <Property name="font" type="java.awt.Font" resourceKey="jLabel5.font"/>
                 <Property name="foreground" type="java.awt.Color" resourceKey="jLabel18.foreground"/>
                 <Property name="text" type="java.lang.String" resourceKey="jLabel18.text"/>
                 <Property name="name" type="java.lang.String" value="jLabel18" noResource="true"/>

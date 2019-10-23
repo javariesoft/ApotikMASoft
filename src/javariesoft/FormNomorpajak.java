@@ -142,7 +142,7 @@ public class FormNomorpajak extends javax.swing.JInternalFrame {
         panelCool1.add(txtNomorakhir);
         txtNomorakhir.setBounds(170, 50, 190, 20);
 
-        jLabel3.setFont(resourceMap.getFont("jLabel3.font")); // NOI18N
+        jLabel3.setFont(resourceMap.getFont("jLabel2.font")); // NOI18N
         jLabel3.setForeground(resourceMap.getColor("jLabel3.foreground")); // NOI18N
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
@@ -178,6 +178,7 @@ public class FormNomorpajak extends javax.swing.JInternalFrame {
         panelCool1.add(jScrollPane1);
         jScrollPane1.setBounds(20, 160, 540, 210);
 
+        btnInsert.setFont(resourceMap.getFont("btnCancel.font")); // NOI18N
         btnInsert.setText(resourceMap.getString("btnInsert.text")); // NOI18N
         btnInsert.setName("btnInsert"); // NOI18N
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -186,8 +187,9 @@ public class FormNomorpajak extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnInsert);
-        btnInsert.setBounds(20, 120, 80, 23);
+        btnInsert.setBounds(20, 120, 100, 23);
 
+        btnUpdate.setFont(resourceMap.getFont("btnCancel.font")); // NOI18N
         btnUpdate.setText(resourceMap.getString("btnUpdate.text")); // NOI18N
         btnUpdate.setName("btnUpdate"); // NOI18N
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -196,8 +198,9 @@ public class FormNomorpajak extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnUpdate);
-        btnUpdate.setBounds(110, 120, 80, 23);
+        btnUpdate.setBounds(130, 120, 100, 23);
 
+        btnDelete.setFont(resourceMap.getFont("btnCancel.font")); // NOI18N
         btnDelete.setText(resourceMap.getString("btnDelete.text")); // NOI18N
         btnDelete.setName("btnDelete"); // NOI18N
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -206,8 +209,9 @@ public class FormNomorpajak extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnDelete);
-        btnDelete.setBounds(200, 120, 90, 23);
+        btnDelete.setBounds(240, 120, 100, 23);
 
+        btnCancel.setFont(resourceMap.getFont("btnCancel.font")); // NOI18N
         btnCancel.setText(resourceMap.getString("btnCancel.text")); // NOI18N
         btnCancel.setName("btnCancel"); // NOI18N
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -216,8 +220,9 @@ public class FormNomorpajak extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnCancel);
-        btnCancel.setBounds(300, 120, 100, 23);
+        btnCancel.setBounds(350, 120, 100, 23);
 
+        btnExit.setFont(resourceMap.getFont("btnCancel.font")); // NOI18N
         btnExit.setText(resourceMap.getString("btnExit.text")); // NOI18N
         btnExit.setName("btnExit"); // NOI18N
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +231,7 @@ public class FormNomorpajak extends javax.swing.JInternalFrame {
             }
         });
         panelCool1.add(btnExit);
-        btnExit.setBounds(410, 120, 100, 23);
+        btnExit.setBounds(460, 120, 100, 23);
 
         getContentPane().add(panelCool1, java.awt.BorderLayout.CENTER);
 
