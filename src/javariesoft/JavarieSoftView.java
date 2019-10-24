@@ -604,6 +604,7 @@ public class JavarieSoftView extends FrameView {
         });
         fileMenu.add(MSearchingBarang);
 
+        MNomorPajak.setIcon(resourceMap.getIcon("MNomorPajak.icon")); // NOI18N
         MNomorPajak.setText(resourceMap.getString("MNomorPajak.text")); // NOI18N
         MNomorPajak.setName("MNomorPajak"); // NOI18N
         MNomorPajak.addActionListener(new java.awt.event.ActionListener() {
@@ -764,6 +765,7 @@ public class JavarieSoftView extends FrameView {
         });
         Mtransaksi.add(MTutupHarian);
 
+        MPajak.setIcon(resourceMap.getIcon("MPajak.icon")); // NOI18N
         MPajak.setText(resourceMap.getString("MPajak.text")); // NOI18N
         MPajak.setName("MPajak"); // NOI18N
         MPajak.addActionListener(new java.awt.event.ActionListener() {
@@ -2120,8 +2122,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     private javax.swing.JMenuItem MLapRekapBarangPerMerk;
     private javax.swing.JMenuItem MLapRekapPengiriman;
     private javax.swing.JMenuItem MLapStokBarang;
-    private javax.swing.JMenuItem MNomorPajak;
-    private javax.swing.JMenuItem MPajak;
+    private static javax.swing.JMenuItem MNomorPajak;
+    private static javax.swing.JMenuItem MPajak;
     private javax.swing.JMenuItem MRekapHutangSupplier;
     public static javax.swing.JMenuItem MRekapPembelianHarian;
     private javax.swing.JMenuItem MRekapPiutangPelanggan;
@@ -2278,6 +2280,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(true);
         MlapEkuitas.setVisible(true);
         MLapPajak.setVisible(true);
+        MNomorPajak.setVisible(true);
+        MPajak.setVisible(true);
     }
 
     public static void nonaktif() {
@@ -2340,6 +2344,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(false);
         MlapEkuitas.setVisible(false);
         MLapPajak.setVisible(false);
+        MNomorPajak.setVisible(false);
+        MPajak.setVisible(false);
     }
 
 //    public static void pembelianakses() {
@@ -2508,6 +2514,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(false);
         MlapEkuitas.setVisible(false);
         MLapPajak.setVisible(true);
+        MNomorPajak.setVisible(false);
+        MPajak.setVisible(false);
     }
 
     public static void pajakakses() {
@@ -2570,6 +2578,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(false);
         MlapEkuitas.setVisible(false);
         MLapPajak.setVisible(false);
+        MNomorPajak.setVisible(true);
+        MPajak.setVisible(true);
     }
 
     public static void operatorakses() {
@@ -2632,6 +2642,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(false);
         MlapEkuitas.setVisible(false);
         MLapPajak.setVisible(false);
+        MNomorPajak.setVisible(true);
+        MPajak.setVisible(true);
     }
 
 //    public static void gudangakses() {
@@ -2758,6 +2770,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(false);
         MlapEkuitas.setVisible(false);
         MLapPajak.setVisible(false);
+        MNomorPajak.setVisible(false);
+        MPajak.setVisible(false);
     }
     
     public static void generalakses() {
@@ -2817,6 +2831,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(false);
         MlapEkuitas.setVisible(false);
         MLapPajak.setVisible(false);
+        MNomorPajak.setVisible(false);
+        MPajak.setVisible(false);
     }
     
     public static void asistenadminakses() {
@@ -2879,6 +2895,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(false);
         MlapEkuitas.setVisible(false);
         MLapPajak.setVisible(false);
+        MNomorPajak.setVisible(true);
+        MPajak.setVisible(true);
     }
     
     public static void masterdataakses() {
@@ -2938,6 +2956,8 @@ private void panelCool1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         MlapRugiLaba.setVisible(false);
         MlapEkuitas.setVisible(false);
         MLapPajak.setVisible(false);
+        MNomorPajak.setVisible(false);
+        MPajak.setVisible(false);
     }
 
     void konek() {
